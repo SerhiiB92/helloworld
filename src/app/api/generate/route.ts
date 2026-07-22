@@ -1,43 +1,55 @@
 import { NextResponse } from "next/server";
-import {
-  generateEditedImage,
-  SUPPORTED_ASPECT_RATIOS,
-  type AspectRatio,
-} from "@/lib/gemini";
+import { generateVariants } from "@/lib/gemini";
+import { getFormat, MAX_COUNT } from "@/lib/formats";
+
+export const maxDuration = 60;
 
 export async function POST(request: Request) {
   const formData = await request.formData();
 
   const image = formData.get("image");
   const prompt = formData.get("prompt");
-  const aspectRatio = formData.get("aspectRatio");
+  const formatId = formData.get("format");
+  const removeLogos = formData.get("removeLogos") === "true";
+  const removeWatermarks = formData.get("removeWatermarks") === "true";
+  const cleanBackground = formData.get("cleanBackground") === "true";
+  const count = Number(formData.get("count") ?? "1");
 
   if (!(image instanceof File)) {
     return NextResponse.json({ error: "Missing image" }, { status: 400 });
   }
-  if (typeof prompt !== "string" || prompt.trim().length === 0) {
+  if (typeof prompt !== "string") {
     return NextResponse.json({ error: "Missing prompt" }, { status: 400 });
   }
-  if (
-    typeof aspectRatio !== "string" ||
-    !SUPPORTED_ASPECT_RATIOS.includes(aspectRatio as AspectRatio)
-  ) {
-    return NextResponse.json({ error: "Invalid aspect ratio" }, { status: 400 });
+  const format = typeof formatId === "string" ? getFormat(formatId) : undefined;
+  if (!format) {
+    return NextResponse.json({ error: "Invalid format" }, { status: 400 });
+  }
+  if (!Number.isInteger(count) || count < 1 || count > MAX_COUNT) {
+    return NextResponse.json({ error: "Invalid count" }, { status: 400 });
   }
 
   const arrayBuffer = await image.arrayBuffer();
   const imageBase64 = Buffer.from(arrayBuffer).toString("base64");
 
   try {
-    const result = await generateEditedImage({
-      imageBase64,
-      mimeType: image.type || "image/png",
-      prompt,
-      aspectRatio: aspectRatio as AspectRatio,
-    });
+    const results = await generateVariants(
+      {
+        imageBase64,
+        mimeType: image.type || "image/png",
+        prompt,
+        format,
+        removeLogos,
+        removeWatermarks,
+        cleanBackground,
+      },
+      count,
+    );
 
     return NextResponse.json({
-      image: `data:${result.mimeType};base64,${result.imageBase64}`,
+      images: results.map(
+        (r) => `data:${r.mimeType};base64,${r.imageBase64}`,
+      ),
     });
   } catch (error) {
     console.error("Image generation failed", error);
