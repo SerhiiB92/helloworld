@@ -9,15 +9,6 @@ import {
   type FormatDef,
 } from "@/lib/formats";
 
-interface TextState {
-  headline: string;
-  body: string;
-  price: string;
-  cta: string;
-  accentColor: string;
-  textColor: string;
-}
-
 interface ResizeItem {
   id: string;
   formatId: string;
@@ -28,11 +19,9 @@ interface ResizeItem {
 
 interface Variant {
   id: string;
-  bgSrc: string; // clean background from the model
-  src: string; // composited creative (text baked in)
+  src: string;
   formatId: string;
   menuOpen: boolean;
-  recomposing: boolean;
   resizes: ResizeItem[];
 }
 
@@ -49,38 +38,6 @@ function safeZoneStyle(format: FormatDef | undefined) {
     left: `${(sz.left / width) * 100}%`,
     right: `${(sz.right / width) * 100}%`,
   };
-}
-
-function hasAnyText(t: TextState) {
-  return Boolean(
-    t.headline.trim() || t.body.trim() || t.price.trim() || t.cta.trim(),
-  );
-}
-
-function textPayload(t: TextState) {
-  return {
-    headline: t.headline,
-    body: t.body,
-    price: t.price,
-    cta: t.cta,
-    accentColor: t.accentColor,
-    textColor: t.textColor,
-  };
-}
-
-async function composeOnBackground(
-  bgSrc: string,
-  formatId: string,
-  text: TextState,
-): Promise<string> {
-  const res = await fetch("/api/compose", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ image: bgSrc, format: formatId, text: textPayload(text) }),
-  });
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.error ?? "Compose failed");
-  return data.image as string;
 }
 
 function ImageFrame({
@@ -110,16 +67,12 @@ function ImageFrame({
 
 function VariantCard({
   variant,
-  showReapply,
   onToggleMenu,
   onResize,
-  onReapply,
 }: {
   variant: Variant;
-  showReapply: boolean;
   onToggleMenu: (id: string) => void;
   onResize: (id: string, formatId: string) => void;
-  onReapply: (id: string) => void;
 }) {
   const format = getFormat(variant.formatId);
   return (
@@ -133,16 +86,6 @@ function VariantCard({
         <div className="mt-2 flex items-center justify-between">
           <span className="text-xs text-zinc-500">{format?.label}</span>
           <div className="flex gap-2">
-            {showReapply && (
-              <button
-                type="button"
-                onClick={() => onReapply(variant.id)}
-                disabled={variant.recomposing}
-                className="text-xs text-zinc-600 hover:text-orange-600 disabled:opacity-50 dark:text-zinc-400"
-              >
-                {variant.recomposing ? "..." : "Обновить текст"}
-              </button>
-            )}
             <a
               href={variant.src}
               download={`variant-${variant.id}.png`}
@@ -221,14 +164,6 @@ export default function Home() {
   const [removeLogos, setRemoveLogos] = useState(true);
   const [removeWatermarks, setRemoveWatermarks] = useState(true);
   const [count, setCount] = useState(1);
-  const [text, setText] = useState<TextState>({
-    headline: "",
-    body: "",
-    price: "",
-    cta: "",
-    accentColor: "#22c55e",
-    textColor: "#ffffff",
-  });
   const [variants, setVariants] = useState<Variant[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -236,11 +171,6 @@ export default function Home() {
   const selectedFormat = useMemo(() => getFormat(formatId), [formatId]);
   const previewZone = safeZoneStyle(selectedFormat);
   const cost = (count * PRICE_PER_IMAGE).toFixed(3);
-  const withText = hasAnyText(text);
-
-  function setTextField(field: keyof TextState, value: string) {
-    setText((prev) => ({ ...prev, [field]: value }));
-  }
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const selected = e.target.files?.[0] ?? null;
@@ -261,7 +191,6 @@ export default function Home() {
       formData.append("format", formatId);
       formData.append("removeLogos", String(removeLogos));
       formData.append("removeWatermarks", String(removeWatermarks));
-      formData.append("cleanBackground", String(withText));
       formData.append("count", String(count));
 
       const res = await fetch("/api/generate", {
@@ -271,25 +200,11 @@ export default function Home() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "Generation failed");
 
-      const backgrounds = data.images as string[];
-
-      // Overlay the exact text onto each background (crisp real-font layer).
-      const composed = await Promise.all(
-        backgrounds.map(async (bg) => {
-          const src = withText
-            ? await composeOnBackground(bg, formatId, text)
-            : bg;
-          return { bg, src };
-        }),
-      );
-
-      const newVariants: Variant[] = composed.map(({ bg, src }) => ({
+      const newVariants: Variant[] = (data.images as string[]).map((src) => ({
         id: uid(),
-        bgSrc: bg,
         src,
         formatId,
         menuOpen: false,
-        recomposing: false,
         resizes: [],
       }));
       setVariants((prev) => [...newVariants, ...prev]);
@@ -304,32 +219,6 @@ export default function Home() {
     setVariants((prev) =>
       prev.map((v) => (v.id === id ? { ...v, menuOpen: !v.menuOpen } : v)),
     );
-  }
-
-  // Re-run the text layer on an existing background — cheap, no model call.
-  async function handleReapply(variantId: string) {
-    const variant = variants.find((v) => v.id === variantId);
-    if (!variant) return;
-    setVariants((prev) =>
-      prev.map((v) =>
-        v.id === variantId ? { ...v, recomposing: true } : v,
-      ),
-    );
-    try {
-      const src = await composeOnBackground(variant.bgSrc, variant.formatId, text);
-      setVariants((prev) =>
-        prev.map((v) =>
-          v.id === variantId ? { ...v, src, recomposing: false } : v,
-        ),
-      );
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Compose failed");
-      setVariants((prev) =>
-        prev.map((v) =>
-          v.id === variantId ? { ...v, recomposing: false } : v,
-        ),
-      );
-    }
   }
 
   async function handleResize(variantId: string, targetFormat: string) {
@@ -413,8 +302,8 @@ export default function Home() {
           Генератор креативов
         </h1>
         <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-          Модель генерирует фон, а твой текст накладывается отдельным слоем —
-          буквы всегда чёткие и точные.
+          Загрузи исходник, опиши в одном поле что нужно (включая текст) — модель
+          сама всё нарисует и разложит.
         </p>
 
         <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[360px_1fr]">
@@ -451,69 +340,18 @@ export default function Home() {
 
             <label className="flex flex-col gap-2">
               <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
-                Фон (что изменить)
+                Промт
               </span>
               <textarea
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
-                rows={2}
-                placeholder="Например: тёмный градиентный фон, лёгкое свечение"
+                rows={7}
+                placeholder={
+                  "Опиши, что нужно, и впиши сам текст. Например:\n\nПолностью замени текст на этот, размести красиво и читаемо:\nЗаголовок: ...\nПодзаголовок: ...\nЦена (обведи кругом): $149 вместо $3853\nКнопка: ЗАБРОНИРОВАТЬ МЕСТО"
+                }
                 className="rounded-lg border border-zinc-300 bg-white p-3 text-sm dark:border-zinc-700 dark:bg-zinc-900"
               />
             </label>
-
-            {/* Text blocks */}
-            <div className="flex flex-col gap-3 rounded-lg border border-zinc-200 p-3 dark:border-zinc-800">
-              <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
-                Текст объявления
-              </span>
-              <textarea
-                value={text.headline}
-                onChange={(e) => setTextField("headline", e.target.value)}
-                rows={2}
-                placeholder="Заголовок"
-                className="rounded-md border border-zinc-300 bg-white p-2 text-sm dark:border-zinc-700 dark:bg-zinc-900"
-              />
-              <textarea
-                value={text.body}
-                onChange={(e) => setTextField("body", e.target.value)}
-                rows={2}
-                placeholder="Основной текст"
-                className="rounded-md border border-zinc-300 bg-white p-2 text-sm dark:border-zinc-700 dark:bg-zinc-900"
-              />
-              <input
-                value={text.price}
-                onChange={(e) => setTextField("price", e.target.value)}
-                placeholder="Цена (обводится кругом), напр. $149 вместо $3853"
-                className="rounded-md border border-zinc-300 bg-white p-2 text-sm dark:border-zinc-700 dark:bg-zinc-900"
-              />
-              <input
-                value={text.cta}
-                onChange={(e) => setTextField("cta", e.target.value)}
-                placeholder="Кнопка CTA, напр. ЗАБРОНИРОВАТЬ МЕСТО"
-                className="rounded-md border border-zinc-300 bg-white p-2 text-sm dark:border-zinc-700 dark:bg-zinc-900"
-              />
-              <div className="flex gap-4">
-                <label className="flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400">
-                  Акцент
-                  <input
-                    type="color"
-                    value={text.accentColor}
-                    onChange={(e) => setTextField("accentColor", e.target.value)}
-                    className="h-7 w-9 rounded border border-zinc-300 dark:border-zinc-700"
-                  />
-                </label>
-                <label className="flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400">
-                  Цвет текста
-                  <input
-                    type="color"
-                    value={text.textColor}
-                    onChange={(e) => setTextField("textColor", e.target.value)}
-                    className="h-7 w-9 rounded border border-zinc-300 dark:border-zinc-700"
-                  />
-                </label>
-              </div>
-            </div>
 
             <div className="flex flex-col gap-2">
               <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
@@ -626,10 +464,8 @@ export default function Home() {
                 <VariantCard
                   key={v.id}
                   variant={v}
-                  showReapply={withText}
                   onToggleMenu={toggleMenu}
                   onResize={handleResize}
-                  onReapply={handleReapply}
                 />
               ))}
             </div>

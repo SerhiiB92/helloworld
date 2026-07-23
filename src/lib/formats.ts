@@ -85,5 +85,7 @@ export function getFormat(id: string): FormatDef | undefined {
 }
 
 // Approximate price per generated image (USD), shown in the UI.
-export const PRICE_PER_IMAGE = 0.008;
+// Rough estimate for Nano Banana Pro (gemini-3-pro-image-preview) — verify
+// the real cost in Google AI Studio usage.
+export const PRICE_PER_IMAGE = 0.134;
 export const MAX_COUNT = 8;

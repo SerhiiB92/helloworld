@@ -2,7 +2,7 @@ import { GoogleGenAI } from "@google/genai";
 import type { FormatDef } from "./formats";
 import { fitToFormat } from "./image";
 
-const MODEL = process.env.GEMINI_MODEL ?? "gemini-2.5-flash-image";
+const MODEL = process.env.GEMINI_MODEL ?? "gemini-3-pro-image-preview";
 
 let client: GoogleGenAI | null = null;
 
@@ -76,28 +76,55 @@ export function buildPrompt(opts: GenerateOptions): string {
   return parts.join("\n\n");
 }
 
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+// The Pro model throttles under load with 503/UNAVAILABLE (and 429). Retry
+// those transient errors with exponential backoff before giving up.
+function isTransient(err: unknown): boolean {
+  const msg = err instanceof Error ? err.message : String(err);
+  return /\b(503|429|UNAVAILABLE|RESOURCE_EXHAUSTED|high demand|overloaded)\b/i.test(
+    msg,
+  );
+}
+
 async function generateOne(
   opts: GenerateOptions,
   prompt: string,
 ): Promise<GeneratedImage> {
   const ai = getClient();
 
-  const response = await ai.models.generateContent({
-    model: MODEL,
-    contents: [
-      {
-        role: "user",
-        parts: [
-          { inlineData: { mimeType: opts.mimeType, data: opts.imageBase64 } },
-          { text: prompt },
+  const maxAttempts = 4;
+  let response;
+  for (let attempt = 1; ; attempt++) {
+    try {
+      response = await ai.models.generateContent({
+        model: MODEL,
+        contents: [
+          {
+            role: "user",
+            parts: [
+              {
+                inlineData: {
+                  mimeType: opts.mimeType,
+                  data: opts.imageBase64,
+                },
+              },
+              { text: prompt },
+            ],
+          },
         ],
-      },
-    ],
-    config: {
-      responseModalities: ["IMAGE"],
-      imageConfig: { aspectRatio: opts.format.geminiAspectRatio },
-    },
-  });
+        config: {
+          responseModalities: ["IMAGE"],
+          imageConfig: { aspectRatio: opts.format.geminiAspectRatio },
+        },
+      });
+      break;
+    } catch (err) {
+      if (attempt >= maxAttempts || !isTransient(err)) throw err;
+      // 2s, 4s, 8s backoff.
+      await sleep(2000 * 2 ** (attempt - 1));
+    }
+  }
 
   const responseParts = response.candidates?.[0]?.content?.parts ?? [];
   const imagePart = responseParts.find((p) => p.inlineData?.data);
