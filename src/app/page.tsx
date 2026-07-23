@@ -1,13 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import {
-  FORMATS,
-  getFormat,
-  MAX_COUNT,
-  PRICE_PER_IMAGE,
-  type FormatDef,
-} from "@/lib/formats";
+import { FORMATS, getFormat, MAX_COUNT, PRICE_PER_IMAGE } from "@/lib/formats";
 
 interface ResizeItem {
   id: string;
@@ -21,6 +15,9 @@ interface Variant {
   id: string;
   src: string;
   formatId: string;
+  // The prompt used to generate this variant, reused when re-adapting it to
+  // another format so the text content stays identical.
+  prompt: string;
   menuOpen: boolean;
   resizes: ResizeItem[];
 }
@@ -29,38 +26,32 @@ function uid() {
   return Math.random().toString(36).slice(2) + Date.now().toString(36);
 }
 
-function safeZoneStyle(format: FormatDef | undefined) {
-  if (!format?.safeZone) return null;
-  const { safeZone: sz, width, height } = format;
-  return {
-    top: `${(sz.top / height) * 100}%`,
-    bottom: `${(sz.bottom / height) * 100}%`,
-    left: `${(sz.left / width) * 100}%`,
-    right: `${(sz.right / width) * 100}%`,
-  };
+// Read a fetch Response as JSON, but survive non-JSON bodies (e.g. a Vercel
+// platform timeout page for the slow Pro model) with a clear message instead
+// of a raw "Unexpected token ... is not valid JSON" crash.
+async function readJson(res: Response): Promise<{ [k: string]: unknown }> {
+  const text = await res.text();
+  try {
+    return JSON.parse(text);
+  } catch {
+    if (res.status === 504 || /timed out|timeout|FUNCTION_INVOCATION/i.test(text)) {
+      throw new Error(
+        "Сервер не успел ответить — модель Pro рисует долго. Уменьшите количество вариантов и попробуйте снова.",
+      );
+    }
+    throw new Error(
+      res.ok
+        ? "Некорректный ответ сервера."
+        : `Ошибка сервера (${res.status}). Модель Pro могла не успеть ответить — попробуйте ещё раз.`,
+    );
+  }
 }
 
-function ImageFrame({
-  src,
-  formatId,
-  alt,
-}: {
-  src: string;
-  formatId: string;
-  alt: string;
-}) {
-  const format = getFormat(formatId);
-  const zone = safeZoneStyle(format);
+function ImageFrame({ src, alt }: { src: string; alt: string }) {
   return (
     <div className="relative overflow-hidden rounded-lg border border-zinc-200 bg-zinc-900 dark:border-zinc-800">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={src} alt={alt} className="w-full object-contain" />
-      {zone && (
-        <div
-          className="pointer-events-none absolute rounded-sm border-2 border-dashed border-orange-400/70"
-          style={zone}
-        />
-      )}
     </div>
   );
 }
@@ -78,11 +69,7 @@ function VariantCard({
   return (
     <div className="flex items-start gap-3">
       <div className="w-56 shrink-0">
-        <ImageFrame
-          src={variant.src}
-          formatId={variant.formatId}
-          alt="Сгенерированный вариант"
-        />
+        <ImageFrame src={variant.src} alt="Сгенерированный вариант" />
         <div className="mt-2 flex items-center justify-between">
           <span className="text-xs text-zinc-500">{format?.label}</span>
           <div className="flex gap-2">
@@ -104,7 +91,10 @@ function VariantCard({
         </div>
         {variant.menuOpen && (
           <div className="mt-2 rounded-md border border-zinc-200 p-2 dark:border-zinc-800">
-            <p className="mb-1.5 text-[11px] text-zinc-500">Ресайз в формат:</p>
+            <p className="mb-1.5 text-[11px] text-zinc-500">
+              Перерисовать в формат (модель переверстает текст, ~$
+              {PRICE_PER_IMAGE} и до минуты):
+            </p>
             <div className="flex flex-wrap gap-1.5">
               {FORMATS.map((f) => (
                 <button
@@ -125,16 +115,14 @@ function VariantCard({
         <div key={r.id} className="w-56 shrink-0">
           <div className="flex min-h-40 items-center justify-center rounded-lg border border-dashed border-zinc-300 bg-white dark:border-zinc-700 dark:bg-zinc-900">
             {r.loading && (
-              <span className="text-xs text-zinc-500">Ресайз...</span>
+              <span className="text-xs text-zinc-500">Перерисовываю...</span>
             )}
             {!r.loading && r.error && (
               <span className="px-2 text-center text-xs text-red-500">
                 {r.error}
               </span>
             )}
-            {!r.loading && r.src && (
-              <ImageFrame src={r.src} formatId={r.formatId} alt="Ресайз" />
-            )}
+            {!r.loading && r.src && <ImageFrame src={r.src} alt="Ресайз" />}
           </div>
           {!r.loading && r.src && (
             <div className="mt-2 flex items-center justify-between">
@@ -169,7 +157,6 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
 
   const selectedFormat = useMemo(() => getFormat(formatId), [formatId]);
-  const previewZone = safeZoneStyle(selectedFormat);
   const cost = (count * PRICE_PER_IMAGE).toFixed(3);
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -197,13 +184,14 @@ export default function Home() {
         method: "POST",
         body: formData,
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? "Generation failed");
+      const data = await readJson(res);
+      if (!res.ok) throw new Error((data.error as string) ?? "Generation failed");
 
       const newVariants: Variant[] = (data.images as string[]).map((src) => ({
         id: uid(),
         src,
         formatId,
+        prompt,
         menuOpen: false,
         resizes: [],
       }));
@@ -251,10 +239,14 @@ export default function Home() {
       const res = await fetch("/api/resize", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ image: variant.src, format: targetFormat }),
+        body: JSON.stringify({
+          image: variant.src,
+          format: targetFormat,
+          prompt: variant.prompt,
+        }),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? "Resize failed");
+      const data = await readJson(res);
+      if (!res.ok) throw new Error((data.error as string) ?? "Resize failed");
 
       setVariants((prev) =>
         prev.map((v) =>
@@ -263,7 +255,7 @@ export default function Home() {
                 ...v,
                 resizes: v.resizes.map((r) =>
                   r.id === resizeId
-                    ? { ...r, loading: false, src: data.image }
+                    ? { ...r, loading: false, src: data.image as string }
                     : r,
                 ),
               }
@@ -329,12 +321,6 @@ export default function Home() {
                   alt="Превью исходника"
                   className="max-h-72 w-full object-contain"
                 />
-                {previewZone && (
-                  <div
-                    className="pointer-events-none absolute rounded-sm border-2 border-dashed border-orange-400/70"
-                    style={previewZone}
-                  />
-                )}
               </div>
             )}
 

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { generateVariants } from "@/lib/gemini";
+import { generateVariants, describeError } from "@/lib/gemini";
 import { getFormat, MAX_COUNT } from "@/lib/formats";
 
 export const maxDuration = 60;
@@ -53,8 +53,6 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error("Image generation failed", error);
-    const message =
-      error instanceof Error ? error.message : "Image generation failed";
-    return NextResponse.json({ error: message }, { status: 502 });
+    return NextResponse.json({ error: describeError(error) }, { status: 502 });
   }
 }
