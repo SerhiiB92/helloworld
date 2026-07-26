@@ -1,0 +1,118 @@
+"""Точка входа: собрать → отфильтровать → обработать LLM → отправить дайджест.
+
+Запуск локально (без отправки, печать в консоль):
+    DRY_RUN=1 GEMINI_API_KEY=... python main.py
+
+Запуск боевой (отправка в Telegram):
+    TELEGRAM_BOT_TOKEN=... TELEGRAM_CHAT_ID=... GEMINI_API_KEY=... python main.py
+
+В GitHub Actions все переменные приходят из Secrets.
+"""
+
+from __future__ import annotations
+
+import logging
+import os
+import sys
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
+import collector
+import evergreen as evergreen_mod
+import llm
+from config import load_config
+from formatter import format_digest
+from state import State
+from telegram_sender import send_message
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s [%(name)s] %(message)s",
+    datefmt="%H:%M:%S",
+)
+log = logging.getLogger("main")
+
+_HERE = os.path.dirname(os.path.abspath(__file__))
+_SOURCES_PATH = os.path.join(_HERE, "sources.yaml")
+_EVERGREEN_PATH = os.path.join(_HERE, "evergreen.json")
+_STATE_PATH = os.path.join(_HERE, "state.json")
+
+
+def run() -> int:
+    cfg = load_config()
+
+    problems = cfg.validate_for_send()
+    if problems:
+        for p in problems:
+            log.error("Конфигурация: %s", p)
+        log.error("Прерываю запуск. Задайте недостающие переменные окружения / Secrets.")
+        return 1
+
+    tz = ZoneInfo(cfg.timezone)
+    now = datetime.now(tz)
+
+    # Защита от DST: шлём только в целевой локальный час.
+    # (в dry-run проверку пропускаем, чтобы можно было тестировать в любое время)
+    if cfg.target_hour is not None and not cfg.dry_run and now.hour != cfg.target_hour:
+        log.info(
+            "Сейчас %02d:00 по %s, целевой час — %02d:00. Пропускаю этот запуск.",
+            now.hour, cfg.timezone, cfg.target_hour,
+        )
+        return 0
+
+    state = State(_STATE_PATH)
+
+    # 1. Сбор
+    sources = collector.load_sources(_SOURCES_PATH)
+    items = collector.collect_all(sources, cfg.lookback_hours)
+    log.info("Всего собрано записей: %d", len(items))
+
+    # 2. Отсев уже присланных
+    fresh = [it for it in items if not state.is_news_seen(it.uid)]
+    log.info("Новых (не присланных ранее): %d", len(fresh))
+
+    # 3. LLM: отбор + саммари
+    entries = []
+    if fresh:
+        candidates = [it.to_candidate() for it in fresh]
+        try:
+            entries = llm.select_and_summarize(cfg, candidates)
+        except Exception as exc:  # noqa: BLE001 - не хотим падать без дайджеста
+            log.error("LLM-обработка не удалась: %s", exc)
+            entries = []
+
+    # 4. Вечнозелёные инсайты
+    library = evergreen_mod.load_library(_EVERGREEN_PATH)
+    evergreen_items = evergreen_mod.pick_evergreen(library, state, cfg.evergreen_count)
+
+    # Если нет вообще ничего — не отправляем пустышку
+    if not entries and not evergreen_items:
+        log.info("Нечего отправлять сегодня. Завершаю без сообщения.")
+        state.save()
+        return 0
+
+    # 5. Вёрстка
+    message = format_digest(entries, evergreen_items, now)
+
+    # 6. Отправка
+    if cfg.dry_run:
+        print("\n" + "=" * 70)
+        print("DRY RUN — сообщение не отправлено. Вот что ушло бы в Telegram:\n")
+        print(message)
+        print("=" * 70 + "\n")
+    else:
+        send_message(cfg.telegram_bot_token, cfg.telegram_chat_id, message)
+        log.info("Дайджест отправлен в Telegram (chat_id=%s)", cfg.telegram_chat_id)
+
+    # 7. Обновление состояния
+    #    Помечаем присланные новости и показанные инсайты, чтобы не повторяться.
+    shown_urls = {e.url for e in entries}
+    state.mark_news([it.uid for it in fresh if it.url in shown_urls])
+    state.mark_evergreen([x["id"] for x in evergreen_items], total_available=len(library))
+    state.save()
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(run())

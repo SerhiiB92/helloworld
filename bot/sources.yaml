@@ -1,0 +1,68 @@
+# Источники контента для дайджеста.
+# Редактируйте этот файл, чтобы добавлять/убирать источники — код менять не нужно.
+# Недоступные или сломанные фиды бот молча пропускает, так что можно
+# смело экспериментировать.
+
+# ---------------------------------------------------------------------------
+# RSS-фиды: зарубежные медиа/блоги по EdTech и перформанс-маркетингу.
+# Стартовый набор — подправляйте под себя.
+# ---------------------------------------------------------------------------
+rss:
+  # -- EdTech / индустрия онлайн-образования --
+  - name: TechCrunch · EdTech
+    url: https://techcrunch.com/tag/edtech/feed/
+  - name: EdSurge
+    url: https://www.edsurge.com/feeds/articles
+  - name: Class Central Report
+    url: https://www.classcentral.com/report/feed/
+
+  # -- Перформанс, закуп, креативы, воронки --
+  - name: Search Engine Land
+    url: https://searchengineland.com/feed
+  - name: Social Media Examiner
+    url: https://www.socialmediaexaminer.com/feed/
+  - name: AdEspresso Blog
+    url: https://adespresso.com/feed/
+  - name: Demand Curve
+    url: https://www.demandcurve.com/blog/rss.xml
+
+  # -- Рынок СНГ --
+  - name: VC.ru · Маркетинг
+    url: https://vc.ru/rss/marketing
+
+# ---------------------------------------------------------------------------
+# Публичные Telegram-каналы. Читаются через веб-превью t.me/s/<username>
+# (без userbot и без вашего аккаунта). Работает только для ПУБЛИЧНЫХ каналов.
+# Указывайте username без @.
+#
+# Пример:
+# telegram:
+#   - epicgrowth
+#   - marketing_analytics
+#
+# Примечание: сюда идут только ПУБЛИЧНЫЕ КАНАЛЫ. Обычные боты (username_bot)
+# читать нельзя — у них нет веб-превью t.me/s/.
+# ---------------------------------------------------------------------------
+telegram:
+  - antonov_marketing
+  - gamingthetraffic
+  - bilchikioann
+  - kyrylenko_pr
+  - andrey_pyvovarov
+
+# ---------------------------------------------------------------------------
+# YouTube-каналы про продвижение онлайн-курсов. Читаются через RSS.
+# Нужен channel_id (строка вида UCxxxxxxxx), НЕ @handle.
+#
+# Как узнать channel_id канала:
+#   1. Откройте любое видео канала → «Поделиться» → или откройте страницу канала;
+#   2. Проще всего: youtube.com/@handle → правой кнопкой «Просмотр кода» →
+#      найдите "channelId":"UC...". Либо вставьте URL канала на сайт вроде
+#      commentpicker.com/youtube-channel-id.php
+#
+# Пример:
+# youtube:
+#   - name: Alex Hormozi
+#     channel_id: UCUyDOdBWhC1MCxEjC46d-zw
+# ---------------------------------------------------------------------------
+youtube: []

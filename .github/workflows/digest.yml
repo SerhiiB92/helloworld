@@ -1,0 +1,81 @@
+name: EdTech Marketing Digest
+
+# Ежедневный дайджест в 10:00 по Варшаве.
+#
+# Варшава переходит на летнее/зимнее время, а cron в GitHub работает по UTC
+# без перевода часов. Поэтому запускаем воркфлоу ДВАЖДЫ — в 08:00 и 09:00 UTC,
+# а код (TARGET_HOUR=10) реально отправляет дайджест только когда локальный
+# час в Варшаве равен 10:
+#   * лето (CEST, UTC+2): срабатывает запуск 08:00 UTC → 10:00 Варшава;
+#   * зима (CET,  UTC+1): срабатывает запуск 09:00 UTC → 10:00 Варшава.
+# Второй запуск в этот день просто тихо выходит. Так 10:00 держится круглый год.
+#
+# ВАЖНО: расписание (schedule) в GitHub Actions работает только из ветки по
+# умолчанию (обычно main). Пока код в отдельной ветке — тестируйте кнопкой
+# "Run workflow" (workflow_dispatch). После мёржа в main заработает расписание.
+
+on:
+  schedule:
+    - cron: "0 8 * * *"   # 10:00 Варшава летом
+    - cron: "0 9 * * *"   # 10:00 Варшава зимой
+  workflow_dispatch:      # ручной запуск из вкладки Actions
+    inputs:
+      dry_run:
+        description: "Тестовый прогон без отправки в Telegram (печать в лог)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: edtech-digest
+  cancel-in-progress: false
+
+permissions:
+  contents: write         # нужно, чтобы коммитить обновлённый state.json
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: bot/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r bot/requirements.txt
+
+      - name: Run digest
+        working-directory: bot
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          LLM_PROVIDER: ${{ vars.LLM_PROVIDER || 'gemini' }}
+          DIGEST_MAX_ITEMS: ${{ vars.DIGEST_MAX_ITEMS || '7' }}
+          LOOKBACK_HOURS: ${{ vars.LOOKBACK_HOURS || '48' }}
+          EVERGREEN_COUNT: ${{ vars.EVERGREEN_COUNT || '2' }}
+          TIMEZONE: ${{ vars.TIMEZONE || 'Europe/Warsaw' }}
+          # Час-цель только для запуска по расписанию. При ручном запуске проверка
+          # часа не нужна — отправляем сразу.
+          TARGET_HOUR: ${{ github.event_name == 'schedule' && (vars.TARGET_HOUR || '10') || '' }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+        run: python main.py
+
+      - name: Commit updated state
+        if: ${{ !inputs.dry_run }}
+        run: |
+          if [[ -n "$(git status --porcelain bot/state.json)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add bot/state.json
+            git commit -m "chore: update digest state [skip ci]"
+            git push origin HEAD:${{ github.ref_name }}
+          else
+            echo "state.json без изменений — коммит не нужен"
+          fi
