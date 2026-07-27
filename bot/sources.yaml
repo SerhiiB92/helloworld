@@ -44,11 +44,66 @@ rss:
 # читать нельзя — у них нет веб-превью t.me/s/.
 # ---------------------------------------------------------------------------
 telegram:
+  # -- Базовые (маркетинг / PR / трафик) --
   - antonov_marketing
   - gamingthetraffic
   - bilchikioann
   - kyrylenko_pr
   - andrey_pyvovarov
+
+  # -- Закупка трафика / User Acquisition --
+  - infohilights
+  - romilead                 # Артемий про User Acquisition
+  - web2app_subscription     # Web2App: UA в iOS-приложениях
+
+  # -- Мобильные приложения / подписки / тренды рынка --
+  - alongapps                # приложения с подписками
+  - apple_developer_news     # Adapty SubHub: мобильные подписки
+
+  # -- Маркетинг / рост / аналитика --
+  - epifanovmaxim            # Епифанов Максим
+  - solokumi                 # Kumar & Solo
+  - bykovdigital             # Bykov Digital
+  - growthsecrets            # Крохмалюк
+
+  # -- Креативы --
+  - mobile_ads_ai            # Мобайл адс и ИИ
+  - golden_nuggets
+  - pollyasking              # PRO маркетинг | Polly Ask
+
+  # -- Фаундеры про B2C-бизнес (прикладное) --
+  - neural_prosecco          # Пресидский залив
+  - rebrykblog               # Rebryk Blog
+  - martyntsev_100x          # 100x | Денис Мартынцев
+
+  # -- AI-инструменты и нейронки (для продакшна креативов) --
+  - ai_newz                  # эйай ньюз
+  - denissexy                # Denis Sexy IT
+  - dAIpotestit              # дAI потестить!
+  - cgevent                  # Метаверсище и ИИще
+  - aihappens                # AI Happens
+  - ai_vibe                  # Человечный интеллект
+  - mimagie
+
+# ---------------------------------------------------------------------------
+# ОПЦИОНАЛЬНЫЕ каналы (слабо относятся к EdTech-маркетингу — редко проходят
+# фильтр релевантности). Хотите добавить в ресёрч — раскомментируйте нужные,
+# перенеся строку в список telegram выше.
+#
+# Фаундеры «про жизнь и бизнес» (философия / личное):
+#   pisarevich              # Ночной Писаревский
+#   peregudov               # Peregudov
+#   vsevolodustinovchannel  # Всеволод Устинов
+#   ventureStuff            # Венчур По Понятиям
+#   aaaaanischenko          # Андрей Анищенко in London
+#
+# Арбитраж:
+#   wildo_blog              # Wildo | Арбитраж
+#   sirka_cpa               # Sirka
+#   mobilemoneymakers       # Ден Марков | Mobile Money Makers
+#   work_life_job           # Жизнь-Работа-Арбитраж by Yan
+#   air4tt                  # Айрбитраж
+# ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
 # YouTube-каналы про продвижение онлайн-курсов. Читаются через RSS.

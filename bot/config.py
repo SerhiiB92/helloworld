@@ -45,6 +45,9 @@ class Config:
 
     # --- Поведение дайджеста ---
     max_items: int = field(default_factory=lambda: _get_int("DIGEST_MAX_ITEMS", 7))
+    # Максимум кандидатов, которых отдаём в LLM за один запрос (источников много —
+    # берём самые свежие). Защищает от раздувания запроса и токенов.
+    max_candidates: int = field(default_factory=lambda: _get_int("MAX_CANDIDATES", 150))
     lookback_hours: int = field(default_factory=lambda: _get_int("LOOKBACK_HOURS", 48))
     evergreen_count: int = field(default_factory=lambda: _get_int("EVERGREEN_COUNT", 2))
     timezone: str = field(default_factory=lambda: os.environ.get("TIMEZONE", "Europe/Warsaw"))
