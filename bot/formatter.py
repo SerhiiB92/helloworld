@@ -80,10 +80,11 @@ def format_digest(
             principle = escape(ins.get("principle", ""))
             source = escape(ins.get("source", ""))
             insight = escape(ins.get("insight", ""))
-            application = escape(ins.get("application", ""))
             block = f"<b>{principle}</b> — <i>{source}</i>\n{insight}"
-            if application:
-                block += f"\n\n👉 <b>Як застосувати:</b> {application}"
+            # Живой пример под нишу (сгенерирован LLM); запасной — статичное application.
+            example = ins.get("example") or ins.get("application", "")
+            if example:
+                block += f"\n\n📎 <b>Приклад:</b> {escape(example)}"
             parts.append(block)
 
     return "\n".join(parts)
