@@ -40,3 +40,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# python (бот в /bot)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+# ПРИМЕЧАНИЕ: bot/state.json НЕ игнорируем — его коммитит GitHub Actions
+# между запусками, чтобы бот помнил уже присланные новости.

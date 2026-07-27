@@ -1,0 +1,9 @@
+# Зависимости EdTech Marketing Digest Bot
+# Держим список минимальным: Telegram и LLM зовём напрямую через httpx,
+# чтобы не тянуть тяжёлые SDK и не зависеть от их версий.
+
+feedparser==6.0.11        # разбор RSS/Atom (блоги, YouTube)
+httpx==0.28.1             # HTTP-клиент (LLM API, Telegram, веб-превью каналов)
+selectolax==0.3.27        # быстрый HTML-парсер для веб-превью t.me/s/<channel>
+PyYAML==6.0.2             # чтение sources.yaml
+python-dateutil==2.9.0    # разбор дат из разношёрстных фидов
