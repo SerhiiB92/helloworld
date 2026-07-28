@@ -1,5 +1,13 @@
 {
- "seen_news": [],
+ "seen_news": [
+  "1eae4f15f19ca373",
+  "33ad73509049ab28",
+  "b70fc90251832a9c",
+  "9214e7d0ac246985",
+  "0d367ec24eddcbcd",
+  "966594ad390adc8a",
+  "9326e0479886e462"
+ ],
  "seen_evergreen": [
   "hormozi-grand-slam",
   "hormozi-guarantee",
@@ -8,7 +16,9 @@
   "webinar-perfect",
   "hormozi-lead-magnet",
   "cialdini-social-proof",
-  "walker-plf"
+  "walker-plf",
+  "walker-seed-launch",
+  "brunson-epiphany-bridge"
  ],
  "last_sent_date": "2026-07-28"
 }
