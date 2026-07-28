@@ -29,19 +29,30 @@ def _get_int(name: str, default: int) -> int:
         return default
 
 
+def _get_str(name: str, default: str = "") -> str:
+    """Читает переменную и ОБРЕЗАЕТ пробелы/переносы строки.
+
+    Частая беда: ключ или токен вставляют в GitHub Secrets с лишним \\n на
+    конце. Тогда, например, Gemini отвечает 401. strip() делает это неважным.
+    """
+    return os.environ.get(name, default).strip()
+
+
 @dataclass
 class Config:
     # --- Telegram ---
-    telegram_bot_token: str = field(default_factory=lambda: os.environ.get("TELEGRAM_BOT_TOKEN", ""))
-    telegram_chat_id: str = field(default_factory=lambda: os.environ.get("TELEGRAM_CHAT_ID", ""))
+    # Все ключи/токены читаем через _get_str — он обрезает пробелы и переносы
+    # строк (иначе лишний \n в секрете ломает запросы, напр. Gemini → 401).
+    telegram_bot_token: str = field(default_factory=lambda: _get_str("TELEGRAM_BOT_TOKEN"))
+    telegram_chat_id: str = field(default_factory=lambda: _get_str("TELEGRAM_CHAT_ID"))
 
     # --- LLM ---
     # provider: "gemini" (основной, бесплатный тариф) или "groq" (fallback).
-    llm_provider: str = field(default_factory=lambda: os.environ.get("LLM_PROVIDER", "gemini").strip().lower())
-    gemini_api_key: str = field(default_factory=lambda: os.environ.get("GEMINI_API_KEY", ""))
-    gemini_model: str = field(default_factory=lambda: os.environ.get("GEMINI_MODEL", "gemini-2.0-flash"))
-    groq_api_key: str = field(default_factory=lambda: os.environ.get("GROQ_API_KEY", ""))
-    groq_model: str = field(default_factory=lambda: os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile"))
+    llm_provider: str = field(default_factory=lambda: _get_str("LLM_PROVIDER", "gemini").lower())
+    gemini_api_key: str = field(default_factory=lambda: _get_str("GEMINI_API_KEY"))
+    gemini_model: str = field(default_factory=lambda: _get_str("GEMINI_MODEL", "gemini-2.0-flash"))
+    groq_api_key: str = field(default_factory=lambda: _get_str("GROQ_API_KEY"))
+    groq_model: str = field(default_factory=lambda: _get_str("GROQ_MODEL", "llama-3.3-70b-versatile"))
 
     # --- Поведение дайджеста ---
     max_items: int = field(default_factory=lambda: _get_int("DIGEST_MAX_ITEMS", 7))
@@ -52,10 +63,9 @@ class Config:
     evergreen_count: int = field(default_factory=lambda: _get_int("EVERGREEN_COUNT", 2))
     timezone: str = field(default_factory=lambda: os.environ.get("TIMEZONE", "Europe/Warsaw"))
 
-    # Час (0-23) по локальному времени, в который разрешена отправка.
-    # Нужен, чтобы обойти проблему летнего/зимнего времени: cron в GitHub Actions
-    # работает по UTC, поэтому мы запускаем воркфлоу на пару часов-кандидатов,
-    # а реально шлём только когда локальный час совпадает с target_hour.
+    # Целевой локальный час (0-23). Дайджест уходит ОДИН раз в день, при первом
+    # запуске в или после этого часа (см. main.py + state.last_sent_date). Так
+    # обходятся и перевод часов, и задержки/пропуски GitHub-крона.
     # Пусто = проверки нет (шлём при любом запуске) — удобно для ручного теста.
     target_hour: int | None = field(
         default_factory=lambda: _get_int("TARGET_HOUR", -1) if os.environ.get("TARGET_HOUR", "").strip() else None

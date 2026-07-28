@@ -11,24 +11,17 @@ rss:
   # -- EdTech / индустрия онлайн-образования --
   - name: TechCrunch · EdTech
     url: https://techcrunch.com/tag/edtech/feed/
-  - name: EdSurge
-    url: https://www.edsurge.com/feeds/articles
   - name: Class Central Report
     url: https://www.classcentral.com/report/feed/
 
   # -- Перформанс, закуп, креативы, воронки --
-  - name: Search Engine Land
-    url: https://searchengineland.com/feed
   - name: Social Media Examiner
     url: https://www.socialmediaexaminer.com/feed/
   - name: AdEspresso Blog
     url: https://adespresso.com/feed/
-  - name: Demand Curve
-    url: https://www.demandcurve.com/blog/rss.xml
-
-  # -- Рынок СНГ --
-  - name: VC.ru · Маркетинг
-    url: https://vc.ru/rss/marketing
+  # Примечание: сюда добавляйте свои RSS. Ранее были EdSurge / Search Engine
+  # Land / Demand Curve / VC.ru — их фиды отдавали 404/403, поэтому убраны.
+  # Если найдёте рабочие адреса — верните.
 
 # ---------------------------------------------------------------------------
 # Публичные Telegram-каналы. Читаются через веб-превью t.me/s/<username>

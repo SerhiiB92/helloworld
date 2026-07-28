@@ -28,6 +28,8 @@ class State:
         self.path = path
         self.seen_news: list[str] = []
         self.seen_evergreen: list[str] = []
+        # Дата последней отправки (ISO, локальная) — чтобы слать максимум раз в день.
+        self.last_sent_date: str = ""
         self._load()
 
     def _load(self) -> None:
@@ -39,6 +41,7 @@ class State:
                 data = json.load(f)
             self.seen_news = list(data.get("seen_news", []))
             self.seen_evergreen = list(data.get("seen_evergreen", []))
+            self.last_sent_date = str(data.get("last_sent_date", ""))
         except (json.JSONDecodeError, OSError) as exc:
             log.warning("Не удалось прочитать состояние (%s), начинаю заново", exc)
 
@@ -75,6 +78,7 @@ class State:
         data = {
             "seen_news": self.seen_news,
             "seen_evergreen": self.seen_evergreen,
+            "last_sent_date": self.last_sent_date,
         }
         with open(self.path, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=1)
