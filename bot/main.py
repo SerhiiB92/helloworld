@@ -82,6 +82,7 @@ def run() -> int:
     #    Каналов/источников много — ограничиваем число кандидатов, отдавая
     #    приоритет самым свежим, чтобы один LLM-запрос оставался компактным.
     entries = []
+    degraded = False  # True, если ИИ недоступен и шлём сырой список
     if fresh:
         fresh_sorted = sorted(
             fresh,
@@ -94,7 +95,10 @@ def run() -> int:
             entries = llm.select_and_summarize(cfg, candidates)
         except Exception as exc:  # noqa: BLE001 - не хотим падать без дайджеста
             log.error("LLM-обработка не удалась: %s", exc)
-            entries = []
+            # ИИ недоступен, но новости есть — отдаём сырой топ вместо пустоты.
+            entries = llm.fallback_entries(fresh_sorted, cfg.max_items)
+            degraded = True
+            log.info("Отправляю сырой fallback: %d записей", len(entries))
 
     # 4. Вечнозелёные инсайты + живые примеры под нишу
     library = evergreen_mod.load_library(_EVERGREEN_PATH)
@@ -115,7 +119,7 @@ def run() -> int:
         return 0
 
     # 5. Вёрстка
-    message = format_digest(entries, evergreen_items, now)
+    message = format_digest(entries, evergreen_items, now, degraded=degraded)
 
     # 6. Отправка
     if cfg.dry_run:

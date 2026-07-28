@@ -14,11 +14,12 @@ import json
 import logging
 import random
 import re
+import time
 
 import httpx
 
 from config import Config
-from models import DigestEntry
+from models import DigestEntry, Item
 
 log = logging.getLogger("llm")
 
@@ -137,8 +138,49 @@ def _call_groq(cfg: Config, system: str, user: str) -> str:
     return data["choices"][0]["message"]["content"]
 
 
+# Коды, при которых имеет смысл подождать и повторить (временные лимиты/сбои).
+_RETRYABLE = {429, 500, 502, 503, 504}
+
+
+def _call_one(provider: str, cfg: Config, system: str, user: str) -> str:
+    if provider == "gemini":
+        return _call_gemini(cfg, system, user)
+    if provider == "groq":
+        return _call_groq(cfg, system, user)
+    raise RuntimeError(f"Неизвестный провайдер: {provider}")
+
+
+def _call_with_retry(provider: str, cfg: Config, system: str, user: str, attempts: int = 3) -> str:
+    """Повторяет запрос при 429/5xx с экспоненциальной паузой.
+
+    429 у бесплатного тарифа Gemini часто временный (лимит в минуту) — короткая
+    пауза обычно его снимает. Задача суточная, так что подождать не страшно.
+    """
+    delay = 15.0
+    for attempt in range(1, attempts + 1):
+        try:
+            return _call_one(provider, cfg, system, user)
+        except httpx.HTTPStatusError as exc:
+            code = exc.response.status_code
+            if code in _RETRYABLE and attempt < attempts:
+                retry_after = exc.response.headers.get("retry-after")
+                try:
+                    wait = float(retry_after) if retry_after else delay
+                except ValueError:
+                    wait = delay
+                wait = min(wait, 60.0)
+                log.warning(
+                    "Провайдер %s вернул %s — жду %.0fс и повторяю (%d/%d)",
+                    provider, code, wait, attempt, attempts,
+                )
+                time.sleep(wait)
+                delay *= 2
+                continue
+            raise
+
+
 def _raw_call(cfg: Config, system: str, user: str) -> str:
-    """Зовём выбранный провайдер, при ошибке — fallback на Groq (если есть ключ)."""
+    """Зовём выбранный провайдер (с ретраями), при ошибке — fallback на Groq."""
     providers = [cfg.llm_provider]
     if cfg.llm_provider != "groq" and cfg.groq_api_key:
         providers.append("groq")
@@ -146,11 +188,7 @@ def _raw_call(cfg: Config, system: str, user: str) -> str:
     last_err: Exception | None = None
     for provider in providers:
         try:
-            if provider == "gemini":
-                return _call_gemini(cfg, system, user)
-            if provider == "groq":
-                log.info("Использую LLM-провайдер: groq")
-                return _call_groq(cfg, system, user)
+            return _call_with_retry(provider, cfg, system, user)
         except (httpx.HTTPError, KeyError, IndexError) as exc:
             log.warning("Провайдер %s не ответил: %s", provider, exc)
             last_err = exc
@@ -192,6 +230,37 @@ def select_and_summarize(cfg: Config, candidates: list[dict]) -> list[DigestEntr
     return entries
 
 
+# Эмодзи-категория по типу источника — для сырого fallback без LLM.
+_TYPE_CATEGORY = {
+    "telegram": "Тренди EdTech",
+    "youtube": "Тренди EdTech",
+    "rss": "Тренди EdTech",
+}
+
+
+def fallback_entries(items: list[Item], limit: int) -> list[DigestEntry]:
+    """Сырой список новостей БЕЗ обработки LLM — на случай, когда ИИ недоступен.
+
+    Лучше отдать пользователю топ свежих ссылок, чем 'ничего интересного',
+    когда новости на самом деле есть.
+    """
+    out: list[DigestEntry] = []
+    for it in items[:limit]:
+        text = (it.summary or "").strip().replace("\n", " ")
+        if len(text) > 240:
+            text = text[:240] + "…"
+        out.append(
+            DigestEntry(
+                title=it.title.strip()[:200] or it.source,
+                summary=text,
+                category=_TYPE_CATEGORY.get(it.source_type, "Тренди EdTech"),
+                url=it.url,
+                source=it.source,
+            )
+        )
+    return out
+
+
 # --- Живые примеры для «вечнозелёных» инсайтов -----------------------------
 
 # Конкретные ниши онлайн-образования. Каждый день выбираем случайные, чтобы
@@ -215,17 +284,21 @@ _NICHES = [
 
 _ILLUSTRATE_SYSTEM = """Ти — досвідчений маркетолог-практик в EdTech і сильний копірайтер.
 Тобі дають список маркетингових принципів із класики інфобізу. До КОЖНОГО
-напиши короткий живий приклад-історію (2-4 речення) того, як цей принцип
-застосувати в КОНКРЕТНІЙ ніші онлайн-освіти, яку вказано в полі niche.
+напиши РОЗГОРНУТИЙ, дуже конкретний приклад застосування в ніші онлайн-освіти,
+яку вказано в полі niche.
 
-Вимоги до прикладу:
-- конкретика: вигадай персонажа/ситуацію, назви оффер, цифру, деталь — щоб було відчуття реального кейсу;
-- по суті принципу, без води й загальних фраз;
-- українською мовою, живим тоном, без markdown;
-- 2-4 речення, не більше.
+Приклад має бути НЕ абстрактним, а «бери й роби». Обовʼязково включи конкретику:
+- персонаж і ситуація (напр. «Олена, засновниця школи іспанської»);
+- якщо мова про оффер — напиши сам оффер дослівно (назва + що входить);
+- якщо доречно — 2-4 конкретних БОНУСИ списком (напр. «розмовний клуб», «шаблони фраз», «перевірка вимови»);
+- конкретні цифри: ціна, дедлайн, гарантія, метрика до/після (напр. «конверсія 3% → 7%»);
+- за потреби — 2-3 практичних КРОКИ, що саме зробити.
+
+Стиль: українською, живо й предметно, 4-7 речень. Можна використати короткий
+список через тире всередині тексту. Без markdown-заголовків, без води.
 
 Поверни СТРОГО валідний JSON без пояснень:
-{"examples": [{"id": "<id принципу>", "example": "<приклад-історія>"}]}"""
+{"examples": [{"id": "<id принципу>", "example": "<розгорнутий конкретний приклад>"}]}"""
 
 
 def illustrate_evergreen(cfg: Config, insights: list[dict]) -> dict[str, str]:
