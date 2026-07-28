@@ -40,9 +40,16 @@ def format_digest(
     entries: list[DigestEntry],
     evergreen: list[dict],
     now: datetime,
+    degraded: bool = False,
 ) -> str:
     parts: list[str] = []
     parts.append(f"<b>📬 EdTech Marketing Digest · {_human_date(now)}</b>")
+
+    if degraded and entries:
+        # ИИ был недоступен — предупреждаем, что это сырой список без обработки.
+        parts.append("")
+        parts.append("<i>⚠️ ШІ тимчасово недоступний (ліміт). Нижче — сирий список "
+                     "свіжих матеріалів без відбору й підсумків.</i>")
 
     if entries:
         # группируем по категориям в заданном порядке
