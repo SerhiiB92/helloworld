@@ -90,10 +90,11 @@ def _build_user_prompt(candidates: list[dict]) -> str:
     )
 
 
-def _call_gemini(cfg: Config, system: str, user: str) -> str:
+def _call_gemini(cfg: Config, system: str, user: str, model: str | None = None) -> str:
+    model = model or cfg.gemini_model
     url = (
         f"https://generativelanguage.googleapis.com/v1beta/models/"
-        f"{cfg.gemini_model}:generateContent"
+        f"{model}:generateContent"
     )
     body = {
         "systemInstruction": {"parts": [{"text": system}]},
@@ -142,16 +143,8 @@ def _call_groq(cfg: Config, system: str, user: str) -> str:
 _RETRYABLE = {429, 500, 502, 503, 504}
 
 
-def _call_one(provider: str, cfg: Config, system: str, user: str) -> str:
-    if provider == "gemini":
-        return _call_gemini(cfg, system, user)
-    if provider == "groq":
-        return _call_groq(cfg, system, user)
-    raise RuntimeError(f"Неизвестный провайдер: {provider}")
-
-
-def _call_with_retry(provider: str, cfg: Config, system: str, user: str, attempts: int = 3) -> str:
-    """Повторяет запрос при 429/5xx с экспоненциальной паузой.
+def _call_with_retry(label: str, callfn, system: str, user: str, attempts: int = 2) -> str:
+    """Повторяет один вызатель при 429/5xx с экспоненциальной паузой.
 
     429 у бесплатного тарифа Gemini часто временный (лимит в минуту) — короткая
     пауза обычно его снимает. Задача суточная, так что подождать не страшно.
@@ -159,7 +152,7 @@ def _call_with_retry(provider: str, cfg: Config, system: str, user: str, attempt
     delay = 15.0
     for attempt in range(1, attempts + 1):
         try:
-            return _call_one(provider, cfg, system, user)
+            return callfn(system, user)
         except httpx.HTTPStatusError as exc:
             code = exc.response.status_code
             if code in _RETRYABLE and attempt < attempts:
@@ -170,8 +163,8 @@ def _call_with_retry(provider: str, cfg: Config, system: str, user: str, attempt
                     wait = delay
                 wait = min(wait, 60.0)
                 log.warning(
-                    "Провайдер %s вернул %s — жду %.0fс и повторяю (%d/%d)",
-                    provider, code, wait, attempt, attempts,
+                    "%s вернул %s — жду %.0fс и повторяю (%d/%d)",
+                    label, code, wait, attempt, attempts,
                 )
                 time.sleep(wait)
                 delay *= 2
@@ -179,20 +172,53 @@ def _call_with_retry(provider: str, cfg: Config, system: str, user: str, attempt
             raise
 
 
+def _gemini_models(cfg: Config) -> list[str]:
+    """Основная модель Gemini + запасные (без дублей)."""
+    models = [cfg.gemini_model]
+    for m in cfg.gemini_fallback_models:
+        if m and m not in models:
+            models.append(m)
+    return models
+
+
+def _build_attempts(cfg: Config) -> list[tuple]:
+    """Упорядоченный список попыток (label, callfn) по провайдерам/моделям."""
+    attempts: list[tuple] = []
+
+    def add_gemini():
+        if not cfg.gemini_api_key:
+            return
+        for m in _gemini_models(cfg):
+            attempts.append((f"gemini/{m}", lambda s, u, mm=m: _call_gemini(cfg, s, u, mm)))
+
+    def add_groq():
+        if cfg.groq_api_key:
+            attempts.append(("groq", lambda s, u: _call_groq(cfg, s, u)))
+
+    # Порядок задаёт llm_provider; другой провайдер идёт резервом.
+    if cfg.llm_provider == "groq":
+        add_groq()
+        add_gemini()
+    else:
+        add_gemini()
+        add_groq()
+    return attempts
+
+
 def _raw_call(cfg: Config, system: str, user: str) -> str:
-    """Зовём выбранный провайдер (с ретраями), при ошибке — fallback на Groq."""
-    providers = [cfg.llm_provider]
-    if cfg.llm_provider != "groq" and cfg.groq_api_key:
-        providers.append("groq")
+    """Перебираем модели Gemini и провайдеров по очереди, каждую — с ретраями."""
+    attempts = _build_attempts(cfg)
+    if not attempts:
+        raise RuntimeError("Не настроен ни один LLM-провайдер (нет ключей)")
 
     last_err: Exception | None = None
-    for provider in providers:
+    for label, callfn in attempts:
         try:
-            return _call_with_retry(provider, cfg, system, user)
+            return _call_with_retry(label, callfn, system, user)
         except (httpx.HTTPError, KeyError, IndexError) as exc:
-            log.warning("Провайдер %s не ответил: %s", provider, exc)
+            log.warning("%s не ответил: %s", label, exc)
             last_err = exc
-    raise RuntimeError(f"Все LLM-провайдеры недоступны: {last_err}")
+    raise RuntimeError(f"Все LLM-варианты недоступны: {last_err}")
 
 
 def select_and_summarize(cfg: Config, candidates: list[dict]) -> list[DigestEntry]:

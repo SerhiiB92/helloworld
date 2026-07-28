@@ -51,6 +51,15 @@ class Config:
     llm_provider: str = field(default_factory=lambda: _get_str("LLM_PROVIDER", "gemini").lower())
     gemini_api_key: str = field(default_factory=lambda: _get_str("GEMINI_API_KEY"))
     gemini_model: str = field(default_factory=lambda: _get_str("GEMINI_MODEL", "gemini-2.0-flash"))
+    # Запасные модели Gemini (тот же ключ). Если основная упирается в 429/лимит,
+    # бот по очереди пробует эти — у разных моделей отдельные квоты free-tier.
+    gemini_fallback_models: list[str] = field(
+        default_factory=lambda: [
+            m.strip()
+            for m in _get_str("GEMINI_FALLBACK_MODELS", "gemini-2.0-flash-lite,gemini-1.5-flash").split(",")
+            if m.strip()
+        ]
+    )
     groq_api_key: str = field(default_factory=lambda: _get_str("GROQ_API_KEY"))
     groq_model: str = field(default_factory=lambda: _get_str("GROQ_MODEL", "llama-3.3-70b-versatile"))
 
