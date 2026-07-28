@@ -50,17 +50,24 @@ def run() -> int:
 
     tz = ZoneInfo(cfg.timezone)
     now = datetime.now(tz)
-
-    # Защита от DST: шлём только в целевой локальный час.
-    # (в dry-run проверку пропускаем, чтобы можно было тестировать в любое время)
-    if cfg.target_hour is not None and not cfg.dry_run and now.hour != cfg.target_hour:
-        log.info(
-            "Сейчас %02d:00 по %s, целевой час — %02d:00. Пропускаю этот запуск.",
-            now.hour, cfg.timezone, cfg.target_hour,
-        )
-        return 0
+    today = now.date().isoformat()
 
     state = State(_STATE_PATH)
+
+    # Расписание: слать максимум раз в день, при первом запуске В или ПОСЛЕ
+    # целевого часа. Так задержки GitHub-крона (иногда 30-60+ мин) не роняют
+    # день — раньше строгая проверка "час == 10" могла молча пропустить сутки.
+    # dry-run проверку не трогает: даёт тестировать в любое время.
+    if cfg.target_hour is not None and not cfg.dry_run:
+        if state.last_sent_date == today:
+            log.info("Сегодня (%s) дайджест уже отправляли — пропускаю.", today)
+            return 0
+        if now.hour < cfg.target_hour:
+            log.info(
+                "Ещё рано: %02d:00 по %s, целевой час — %02d:00. Ждём следующий запуск.",
+                now.hour, cfg.timezone, cfg.target_hour,
+            )
+            return 0
 
     # 1. Сбор
     sources = collector.load_sources(_SOURCES_PATH)
@@ -119,6 +126,8 @@ def run() -> int:
     else:
         send_message(cfg.telegram_bot_token, cfg.telegram_chat_id, message)
         log.info("Дайджест отправлен в Telegram (chat_id=%s)", cfg.telegram_chat_id)
+        # Отмечаем дату отправки — чтобы следующий запуск в тот же день не дублировал.
+        state.last_sent_date = today
 
     # 7. Обновление состояния
     #    Помечаем присланные новости и показанные инсайты, чтобы не повторяться.
