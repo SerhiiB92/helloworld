@@ -13,7 +13,14 @@
   "26fa073d7e855be3",
   "c8f2acb22d1e61a2",
   "1b875a228172851a",
-  "8e2515f76edded67"
+  "8e2515f76edded67",
+  "c0c46cb43f00e0ba",
+  "c4abae5010aa411f",
+  "2b29e314a71a5160",
+  "6d0e65a93a8e9f2c",
+  "c7dbfa2446821c21",
+  "71e51b762c718326",
+  "bcdf0d9484107a60"
  ],
  "seen_evergreen": [
   "hormozi-grand-slam",
@@ -27,7 +34,9 @@
   "walker-seed-launch",
   "brunson-epiphany-bridge",
   "hormozi-value-equation",
-  "sabri-adgrid"
+  "sabri-adgrid",
+  "hormozi-core-four",
+  "brunson-value-ladder"
  ],
  "last_sent_date": "2026-07-29"
 }
