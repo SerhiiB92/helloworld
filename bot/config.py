@@ -52,11 +52,11 @@ class Config:
     gemini_api_key: str = field(default_factory=lambda: _get_str("GEMINI_API_KEY"))
     gemini_model: str = field(default_factory=lambda: _get_str("GEMINI_MODEL", "gemini-2.0-flash"))
     # Запасные модели Gemini (тот же ключ). Если основная упирается в 429/лимит,
-    # бот по очереди пробует эти — у разных моделей отдельные квоты free-tier.
+    # бот по очереди пробует эти. gemini-1.5-flash убран — Google его отключил (404).
     gemini_fallback_models: list[str] = field(
         default_factory=lambda: [
             m.strip()
-            for m in _get_str("GEMINI_FALLBACK_MODELS", "gemini-2.0-flash-lite,gemini-1.5-flash").split(",")
+            for m in _get_str("GEMINI_FALLBACK_MODELS", "gemini-2.5-flash,gemini-2.0-flash-lite").split(",")
             if m.strip()
         ]
     )
@@ -66,8 +66,9 @@ class Config:
     # --- Поведение дайджеста ---
     max_items: int = field(default_factory=lambda: _get_int("DIGEST_MAX_ITEMS", 7))
     # Максимум кандидатов, которых отдаём в LLM за один запрос (источников много —
-    # берём самые свежие). Защищает от раздувания запроса и токенов.
-    max_candidates: int = field(default_factory=lambda: _get_int("MAX_CANDIDATES", 150))
+    # берём самые свежие). Держим компактным: у Groq есть лимит на размер запроса
+    # (иначе 413 Payload Too Large). 30 свежих с коротким текстом влезают надёжно.
+    max_candidates: int = field(default_factory=lambda: _get_int("MAX_CANDIDATES", 30))
     lookback_hours: int = field(default_factory=lambda: _get_int("LOOKBACK_HOURS", 48))
     evergreen_count: int = field(default_factory=lambda: _get_int("EVERGREEN_COUNT", 2))
     timezone: str = field(default_factory=lambda: os.environ.get("TIMEZONE", "Europe/Warsaw"))

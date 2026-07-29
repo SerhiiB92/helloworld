@@ -27,11 +27,16 @@ class Item:
     def to_candidate(self) -> dict:
         """Компактное представление для передачи в LLM."""
         text = self.summary.strip().replace("\n", " ")
-        if len(text) > 500:
-            text = text[:500] + "…"
+        # Короткий сниппет: для оценки релевантности хватает, а запрос к LLM
+        # остаётся компактным (у Groq лимит на размер тела запроса — иначе 413).
+        if len(text) > 150:
+            text = text[:150] + "…"
+        title = self.title.strip()
+        if len(title) > 160:
+            title = title[:160] + "…"
         return {
             "id": self.uid,
-            "title": self.title.strip()[:250],
+            "title": title,
             "source": self.source,
             "type": self.source_type,
             "text": text,
