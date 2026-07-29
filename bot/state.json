@@ -20,7 +20,11 @@
   "6d0e65a93a8e9f2c",
   "c7dbfa2446821c21",
   "71e51b762c718326",
-  "bcdf0d9484107a60"
+  "bcdf0d9484107a60",
+  "0e684f89c937311a",
+  "473de660f1c2fa98",
+  "7794a5948fea1f10",
+  "e93f539fa980d00b"
  ],
  "seen_evergreen": [
   "hormozi-grand-slam",
@@ -36,7 +40,9 @@
   "hormozi-value-equation",
   "sabri-adgrid",
   "hormozi-core-four",
-  "brunson-value-ladder"
+  "brunson-value-ladder",
+  "walker-sideways-letter",
+  "creative-ugc"
  ],
  "last_sent_date": "2026-07-29"
 }
