@@ -6,7 +6,14 @@
   "9214e7d0ac246985",
   "0d367ec24eddcbcd",
   "966594ad390adc8a",
-  "9326e0479886e462"
+  "9326e0479886e462",
+  "79703779762daf20",
+  "53f8c268476b557c",
+  "094cdf6d18709baf",
+  "26fa073d7e855be3",
+  "c8f2acb22d1e61a2",
+  "1b875a228172851a",
+  "8e2515f76edded67"
  ],
  "seen_evergreen": [
   "hormozi-grand-slam",
@@ -18,7 +25,9 @@
   "cialdini-social-proof",
   "walker-plf",
   "walker-seed-launch",
-  "brunson-epiphany-bridge"
+  "brunson-epiphany-bridge",
+  "hormozi-value-equation",
+  "sabri-adgrid"
  ],
- "last_sent_date": "2026-07-28"
+ "last_sent_date": "2026-07-29"
 }
