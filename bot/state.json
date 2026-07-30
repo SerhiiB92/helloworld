@@ -24,7 +24,12 @@
   "0e684f89c937311a",
   "473de660f1c2fa98",
   "7794a5948fea1f10",
-  "e93f539fa980d00b"
+  "e93f539fa980d00b",
+  "7a2b9e570b6d6134",
+  "ba35147acce9195c",
+  "5e64ff3555cc8342",
+  "3f645b10c0e11da1",
+  "9d40eb11b8a2b781"
  ],
  "seen_evergreen": [
   "hormozi-grand-slam",
@@ -42,7 +47,9 @@
   "hormozi-core-four",
   "brunson-value-ladder",
   "walker-sideways-letter",
-  "creative-ugc"
+  "creative-ugc",
+  "metrics-one-metric",
+  "metrics-ltv-cac"
  ],
- "last_sent_date": "2026-07-29"
+ "last_sent_date": "2026-07-30"
 }
