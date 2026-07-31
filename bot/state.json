@@ -29,7 +29,11 @@
   "ba35147acce9195c",
   "5e64ff3555cc8342",
   "3f645b10c0e11da1",
-  "9d40eb11b8a2b781"
+  "9d40eb11b8a2b781",
+  "9480a1aa2e0b815c",
+  "4e651c697ed5c414",
+  "835e3c716f23740f",
+  "8f54eff074235a0f"
  ],
  "seen_evergreen": [
   "hormozi-grand-slam",
@@ -49,7 +53,9 @@
   "walker-sideways-letter",
   "creative-ugc",
   "metrics-one-metric",
-  "metrics-ltv-cac"
+  "metrics-ltv-cac",
+  "hormozi-naming",
+  "cialdini-commitment"
  ],
- "last_sent_date": "2026-07-30"
+ "last_sent_date": "2026-07-31"
 }
