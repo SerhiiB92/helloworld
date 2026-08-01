@@ -33,7 +33,11 @@
   "9480a1aa2e0b815c",
   "4e651c697ed5c414",
   "835e3c716f23740f",
-  "8f54eff074235a0f"
+  "8f54eff074235a0f",
+  "4aff55d7ccfc3e5d",
+  "8f78e8a76d6b8922",
+  "abf84aa0a7f1abde",
+  "3989a71c46c40212"
  ],
  "seen_evergreen": [
   "hormozi-grand-slam",
@@ -55,7 +59,9 @@
   "metrics-one-metric",
   "metrics-ltv-cac",
   "hormozi-naming",
-  "cialdini-commitment"
+  "cialdini-commitment",
+  "creative-angle-testing",
+  "hormozi-give-give-ask"
  ],
- "last_sent_date": "2026-07-31"
+ "last_sent_date": "2026-08-01"
 }
