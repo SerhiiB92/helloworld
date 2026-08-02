@@ -28,7 +28,9 @@ categories:
   - {name: "Ринок і монетизація", emoji: "💰"}
 
 evergreen:
-  enabled: true
+  # По просьбе: геймдев-бот — только новости, без блока классики.
+  # Чтобы вернуть рубрику — поставьте enabled: true.
+  enabled: false
   header: "♻️ ВІЧНОЗЕЛЕНЕ · КЛАСИКА ГЕЙМДЕВ-БІЗНЕСУ"
   example_label: "Приклад"
   niches:

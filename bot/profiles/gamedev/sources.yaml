@@ -25,6 +25,10 @@ rss:
   - name: InvestGame
     url: https://investgame.net/feed/
 
+  # -- Платформы / официальные новости --
+  - name: Xbox Wire
+    url: https://news.xbox.com/en-us/feed/
+
 # ---------------------------------------------------------------------------
 # Публичные Telegram-каналы по геймдев-бизнесу. Только ПУБЛИЧНЫЕ каналы,
 # username без @. Обычных ботов (*_bot) читать нельзя.
@@ -34,10 +38,15 @@ rss:
 #   - app2top
 #   - gamedev_news
 # ---------------------------------------------------------------------------
-telegram: []
+telegram:
+  - gamedev_dou             # GameDev DOU — украинское геймдев-сообщество
 
 # ---------------------------------------------------------------------------
 # YouTube-каналы (нужен channel_id вида UC..., не @handle). См. инструкцию в
 # профиле edtech/sources.yaml, как узнать channel_id.
 # ---------------------------------------------------------------------------
-youtube: []
+youtube:
+  - name: GDC
+    channel_id: UC0JB7TSe49lg56u6qH8y_MQ    # Game Developers Conference — доклады по бизнесу/дизайну
+  - name: Deconstructor of Fun
+    channel_id: UCbJdp9rI3sDhVzKKZkWDZuw    # бизнес-разборы игр, монетизация
