@@ -69,10 +69,10 @@ class Config:
     # --- Поведение дайджеста ---
     max_items: int = field(default_factory=lambda: _get_int("DIGEST_MAX_ITEMS", 7))
     # Максимум кандидатов, которых отдаём в LLM за один запрос (источников много —
-    # берём самые свежие). Держим компактным: у Groq есть лимит на размер запроса
-    # (иначе 413 Payload Too Large). 25 кандидатов × ~400 симв. текста ≈ 18K симв. —
-    # надёжно под лимитом, но модели хватает текста для содержательных саммари.
-    max_candidates: int = field(default_factory=lambda: _get_int("MAX_CANDIDATES", 25))
+    # берём самые свежие). 40 × ~400 симв. текста ≈ 30K симв. — надёжно под лимитом
+    # Groq (413 был при ~59K), при этом до модели доходит больше бизнес-новостей
+    # из RSS, а не только свежие посты одного community-канала.
+    max_candidates: int = field(default_factory=lambda: _get_int("MAX_CANDIDATES", 40))
     lookback_hours: int = field(default_factory=lambda: _get_int("LOOKBACK_HOURS", 48))
     evergreen_count: int = field(default_factory=lambda: _get_int("EVERGREEN_COUNT", 2))
     timezone: str = field(default_factory=lambda: os.environ.get("TIMEZONE", "Europe/Warsaw"))
