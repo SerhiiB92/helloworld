@@ -12,7 +12,6 @@
 from __future__ import annotations
 
 import logging
-import os
 import sys
 from datetime import datetime
 from zoneinfo import ZoneInfo
@@ -22,6 +21,7 @@ import evergreen as evergreen_mod
 import llm
 from config import load_config
 from formatter import format_digest
+from profile import load_profile
 from state import State
 from telegram_sender import send_message
 
@@ -31,11 +31,6 @@ logging.basicConfig(
     datefmt="%H:%M:%S",
 )
 log = logging.getLogger("main")
-
-_HERE = os.path.dirname(os.path.abspath(__file__))
-_SOURCES_PATH = os.path.join(_HERE, "sources.yaml")
-_EVERGREEN_PATH = os.path.join(_HERE, "evergreen.json")
-_STATE_PATH = os.path.join(_HERE, "state.json")
 
 
 def run() -> int:
@@ -48,11 +43,14 @@ def run() -> int:
         log.error("Прерываю запуск. Задайте недостающие переменные окружения / Secrets.")
         return 1
 
+    profile = load_profile(cfg.bot_profile)
+    log.info("Профиль: %s (%s)", profile.name, profile.title)
+
     tz = ZoneInfo(cfg.timezone)
     now = datetime.now(tz)
     today = now.date().isoformat()
 
-    state = State(_STATE_PATH)
+    state = State(profile.state_path)
 
     # Расписание: слать максимум раз в день, при первом запуске В или ПОСЛЕ
     # целевого часа. Так задержки GitHub-крона (иногда 30-60+ мин) не роняют
@@ -70,7 +68,7 @@ def run() -> int:
             return 0
 
     # 1. Сбор
-    sources = collector.load_sources(_SOURCES_PATH)
+    sources = collector.load_sources(profile.sources_path)
     items = collector.collect_all(sources, cfg.lookback_hours)
     log.info("Всего собрано записей: %d", len(items))
 
@@ -92,25 +90,28 @@ def run() -> int:
         candidates = [it.to_candidate() for it in fresh_sorted[: cfg.max_candidates]]
         log.info("Кандидатов передаём в LLM: %d (из %d свежих)", len(candidates), len(fresh))
         try:
-            entries = llm.select_and_summarize(cfg, candidates)
+            entries = llm.select_and_summarize(cfg, candidates, profile)
         except Exception as exc:  # noqa: BLE001 - не хотим падать без дайджеста
             log.error("LLM-обработка не удалась: %s", exc)
             # ИИ недоступен, но новости есть — отдаём сырой топ вместо пустоты.
-            entries = llm.fallback_entries(fresh_sorted, cfg.max_items)
+            entries = llm.fallback_entries(fresh_sorted, cfg.max_items, profile.default_category)
             degraded = True
             log.info("Отправляю сырой fallback: %d записей", len(entries))
 
-    # 4. Вечнозелёные инсайты + живые примеры под нишу
-    library = evergreen_mod.load_library(_EVERGREEN_PATH)
-    evergreen_items = evergreen_mod.pick_evergreen(library, state, cfg.evergreen_count)
-    if evergreen_items:
-        try:
-            examples = llm.illustrate_evergreen(cfg, evergreen_items)
-            for ins in evergreen_items:
-                if ins.get("id") in examples:
-                    ins["example"] = examples[ins["id"]]
-        except Exception as exc:  # noqa: BLE001 - примеры необязательны
-            log.warning("Генерация примеров для классики не удалась: %s", exc)
+    # 4. Вечнозелёные инсайты + живые примеры под нишу (если включено в профиле)
+    library: list[dict] = []
+    evergreen_items: list[dict] = []
+    if profile.evergreen_enabled:
+        library = evergreen_mod.load_library(profile.evergreen_path)
+        evergreen_items = evergreen_mod.pick_evergreen(library, state, cfg.evergreen_count)
+        if evergreen_items:
+            try:
+                examples = llm.illustrate_evergreen(cfg, evergreen_items, profile)
+                for ins in evergreen_items:
+                    if ins.get("id") in examples:
+                        ins["example"] = examples[ins["id"]]
+            except Exception as exc:  # noqa: BLE001 - примеры необязательны
+                log.warning("Генерация примеров для классики не удалась: %s", exc)
 
     # Если нет вообще ничего — не отправляем пустышку
     if not entries and not evergreen_items:
@@ -119,7 +120,7 @@ def run() -> int:
         return 0
 
     # 5. Вёрстка
-    message = format_digest(entries, evergreen_items, now, degraded=degraded)
+    message = format_digest(entries, evergreen_items, now, profile, degraded=degraded)
 
     # 6. Отправка
     if cfg.dry_run:

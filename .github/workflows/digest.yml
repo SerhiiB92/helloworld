@@ -53,6 +53,7 @@ jobs:
       - name: Run digest
         working-directory: bot
         env:
+          BOT_PROFILE: edtech
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -71,12 +72,17 @@ jobs:
       - name: Commit updated state
         if: ${{ !inputs.dry_run }}
         run: |
-          if [[ -n "$(git status --porcelain bot/state.json)" ]]; then
+          STATE=bot/profiles/edtech/state.json
+          if [[ -n "$(git status --porcelain $STATE)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add bot/state.json
-            git commit -m "chore: update digest state [skip ci]"
-            git push origin HEAD:${{ github.ref_name }}
+            git add "$STATE"
+            git commit -m "chore: update edtech digest state [skip ci]"
+            # Два бота могут коммитить одновременно — тянем с rebase и повторяем push.
+            for i in 1 2 3 4 5; do
+              git pull --rebase --autostash origin ${{ github.ref_name }} && \
+              git push origin HEAD:${{ github.ref_name }} && break || sleep 5
+            done
           else
             echo "state.json без изменений — коммит не нужен"
           fi

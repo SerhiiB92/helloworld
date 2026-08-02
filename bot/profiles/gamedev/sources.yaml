@@ -1,0 +1,43 @@
+# Источники для геймдев-бизнес дайджеста.
+# Недоступный источник бот молча пропускает — можно смело экспериментировать.
+
+# ---------------------------------------------------------------------------
+# RSS-фиды: зарубежные медиа/аналитика по бизнесу игровой индустрии.
+# ---------------------------------------------------------------------------
+rss:
+  # -- Индустрия / бизнес --
+  - name: GamesIndustry.biz
+    url: https://www.gamesindustry.biz/feed
+  - name: Game Developer
+    url: https://www.gamedeveloper.com/rss.xml
+  - name: PocketGamer.biz
+    url: https://www.pocketgamer.biz/rss/
+  - name: GamesBeat (VentureBeat)
+    url: https://venturebeat.com/category/games/feed/
+
+  # -- Аналитика рынка / монетизация / сделки --
+  - name: Naavik
+    url: https://naavik.co/feed/
+  - name: Deconstructor of Fun
+    url: https://www.deconstructoroffun.com/blog?format=rss
+  - name: GameDiscoverCo
+    url: https://newsletter.gamediscover.co/feed
+  - name: InvestGame
+    url: https://investgame.net/feed/
+
+# ---------------------------------------------------------------------------
+# Публичные Telegram-каналы по геймдев-бизнесу. Только ПУБЛИЧНЫЕ каналы,
+# username без @. Обычных ботов (*_bot) читать нельзя.
+#
+# Пример:
+# telegram:
+#   - app2top
+#   - gamedev_news
+# ---------------------------------------------------------------------------
+telegram: []
+
+# ---------------------------------------------------------------------------
+# YouTube-каналы (нужен channel_id вида UC..., не @handle). См. инструкцию в
+# профиле edtech/sources.yaml, как узнать channel_id.
+# ---------------------------------------------------------------------------
+youtube: []
