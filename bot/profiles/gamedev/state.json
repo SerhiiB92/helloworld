@@ -1,5 +1,12 @@
 {
- "seen_news": [],
- "seen_evergreen": [],
- "last_sent_date": ""
+ "seen_news": [
+  "e608cb357e18566e",
+  "95cfdbac0436f91e",
+  "3412d51fa412180f"
+ ],
+ "seen_evergreen": [
+  "player-motivations",
+  "koster-fun-learning"
+ ],
+ "last_sent_date": "2026-08-02"
 }
