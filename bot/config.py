@@ -40,6 +40,9 @@ def _get_str(name: str, default: str = "") -> str:
 
 @dataclass
 class Config:
+    # Профиль бота (папка profiles/<name>/): "edtech", "gamedev", …
+    bot_profile: str = field(default_factory=lambda: _get_str("BOT_PROFILE", "edtech"))
+
     # --- Telegram ---
     # Все ключи/токены читаем через _get_str — он обрезает пробелы и переносы
     # строк (иначе лишний \n в секрете ломает запросы, напр. Gemini → 401).

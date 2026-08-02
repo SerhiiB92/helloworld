@@ -20,49 +20,42 @@ import httpx
 
 from config import Config
 from models import DigestEntry, Item
+from profile import Profile
 
 log = logging.getLogger("llm")
 
 _HTTP_TIMEOUT = 90.0
 
-# Критерії релевантності — серце «розумного» відбору. Змінюючи цей текст,
-# ви змінюєте смак бота.
-CRITERIA = """Ніша: маркетинг в EdTech (онлайн-освіта), ринки Заходу та СНД.
-Відбирай записи, корисні практикуючому маркетологу онлайн-школи за темами:
-1. КРЕАТИВИ ТА ВОРОНКИ — нові підходи в креативах, лендінги, воронки, офери, запуски.
-2. ПЕРФОРМАНС ТА ЗАКУПІВЛЯ — таргетинг, метрики, платформи (Meta/Google/TikTok), UA, оптимізація ROI/CAC.
-3. ТРЕНДИ EDTECH — новини індустрії, раунди, AI в освіті, рухи конкурентів.
-4. КЕЙСИ ТА ЦИФРИ — конкретні розбори з метриками, A/B-тести, growth-кейси.
-
-Джерела ширші за суто EdTech: серед них канали про закупівлю трафіку, UA,
-мобільні підписки, growth, AI-інструменти для продакшну креативів та досвід
-фаундерів. Це нормально — бери з них те, що маркетолог онлайн-школи може
-ЗАСТОСУВАТИ (тактика, механіка воронки, підхід до креативів, монетизація
-підписок, новий AI-інструмент для реклами), і в підсумку коротко поясни, як
-саме це застосувати в онлайн-освіті. Загальні новини не з маркетингу — відсіюй.
-
-Відсіюй: загальні мотиваційні/філософські пости, рекламу без користі, клікбейт,
-дублі однієї новини, суто особисті нотатки, новини поза темою маркетингу."""
-
-_SYSTEM_PROMPT = """Ти — редактор щоденного дайджесту з маркетингу в EdTech.
+# Шаблон системного промпта для отбора новостей. Нишевые части (ниша, что доносит
+# саммари, список категорий) подставляются из профиля.
+_SYSTEM_PROMPT_TMPL = """Ти — редактор щоденного дайджесту з {niche}.
 Тобі дають список кандидатів (статті, пости, відео) за останні добу-дві.
 Твоє завдання — відібрати лише найцінніше, прибрати дублі та слабке, і по кожному
 відібраному написати короткий підсумок УКРАЇНСЬКОЮ мовою.
 
 Поверни СТРОГО валідний JSON без пояснень, у форматі:
-{"entries": [
-  {"id": "<id кандидата>",
+{{"entries": [
+  {{"id": "<id кандидата>",
    "title_ua": "<короткий заголовок українською>",
-   "summary_ua": "<2-3 речення: суть і чим корисно маркетологу онлайн-школи>",
-   "category": "<одна з: Креативи та воронки | Перформанс та закупівля | Тренди EdTech | Кейси та цифри>"}
-]}
+   "summary_ua": "<2-3 речення: суть і {summary_hint}>",
+   "category": "<одна з: {categories}>"}}
+]}}
 
 Правила:
-- Не більше %(max_items)d записів. Краще менше, але якісніше — тримай високий поріг.
+- Не більше {max_items} записів. Краще менше, але якісніше — тримай високий поріг.
 - Якщо з кількох кандидатів це одна й та сама новина — залиш один найкращий.
 - id бери РІВНО з поля id кандидата, нічого не вигадуй.
 - summary_ua пиши українською, живо та по суті, без води й без markdown.
-- Якщо нічого вартого немає — поверни {"entries": []}."""
+- Якщо нічого вартого немає — поверни {{"entries": []}}."""
+
+
+def _build_system_prompt(profile: Profile, max_items: int) -> str:
+    return _SYSTEM_PROMPT_TMPL.format(
+        niche=profile.system_niche,
+        summary_hint=profile.summary_hint,
+        categories=" | ".join(profile.category_names()),
+        max_items=max_items,
+    )
 
 
 def _extract_json(text: str) -> dict:
@@ -81,10 +74,10 @@ def _extract_json(text: str) -> dict:
     return json.loads(text)
 
 
-def _build_user_prompt(candidates: list[dict]) -> str:
+def _build_user_prompt(criteria: str, candidates: list[dict]) -> str:
     payload = json.dumps(candidates, ensure_ascii=False, indent=1)
     return (
-        f"{CRITERIA}\n\n"
+        f"{criteria}\n\n"
         f"Вот кандидаты (JSON-массив):\n{payload}\n\n"
         "Отбери лучшее и верни JSON в требуемом формате."
     )
@@ -221,13 +214,13 @@ def _raw_call(cfg: Config, system: str, user: str) -> str:
     raise RuntimeError(f"Все LLM-варианты недоступны: {last_err}")
 
 
-def select_and_summarize(cfg: Config, candidates: list[dict]) -> list[DigestEntry]:
+def select_and_summarize(cfg: Config, candidates: list[dict], profile: Profile) -> list[DigestEntry]:
     """Главная функция: из кандидатов выбираем топ и получаем саммари на украинском."""
     if not candidates:
         return []
 
-    system = _SYSTEM_PROMPT % {"max_items": cfg.max_items}
-    user = _build_user_prompt(candidates)
+    system = _build_system_prompt(profile, cfg.max_items)
+    user = _build_user_prompt(profile.criteria, candidates)
 
     raw = _raw_call(cfg, system, user)
     try:
@@ -247,7 +240,7 @@ def select_and_summarize(cfg: Config, candidates: list[dict]) -> list[DigestEntr
             DigestEntry(
                 title=(e.get("title_ua") or cand["title"]).strip(),
                 summary=(e.get("summary_ua") or "").strip(),
-                category=(e.get("category") or "Тренди EdTech").strip(),
+                category=(e.get("category") or profile.default_category).strip(),
                 url=cand["url"],
                 source=cand["source"],
             )
@@ -256,15 +249,7 @@ def select_and_summarize(cfg: Config, candidates: list[dict]) -> list[DigestEntr
     return entries
 
 
-# Эмодзи-категория по типу источника — для сырого fallback без LLM.
-_TYPE_CATEGORY = {
-    "telegram": "Тренди EdTech",
-    "youtube": "Тренди EdTech",
-    "rss": "Тренди EdTech",
-}
-
-
-def fallback_entries(items: list[Item], limit: int) -> list[DigestEntry]:
+def fallback_entries(items: list[Item], limit: int, default_category: str) -> list[DigestEntry]:
     """Сырой список новостей БЕЗ обработки LLM — на случай, когда ИИ недоступен.
 
     Лучше отдать пользователю топ свежих ссылок, чем 'ничего интересного',
@@ -279,7 +264,7 @@ def fallback_entries(items: list[Item], limit: int) -> list[DigestEntry]:
             DigestEntry(
                 title=it.title.strip()[:200] or it.source,
                 summary=text,
-                category=_TYPE_CATEGORY.get(it.source_type, "Тренди EdTech"),
+                category=default_category,
                 url=it.url,
                 source=it.source,
             )
@@ -289,54 +274,17 @@ def fallback_entries(items: list[Item], limit: int) -> list[DigestEntry]:
 
 # --- Живые примеры для «вечнозелёных» инсайтов -----------------------------
 
-# Конкретные ниши онлайн-образования. Каждый день выбираем случайные, чтобы
-# примеры к классике не приедались и звучали свежо.
-_NICHES = [
-    "онлайн-курси англійської для дорослих",
-    "IT-буткемп з програмування для новачків",
-    "підготовка школярів до НМТ/ЗНО",
-    "онлайн-школа малювання та ілюстрації",
-    "курси Figma та UX/UI-дизайну",
-    "дитяча онлайн-школа математики",
-    "курси іспанської з нуля",
-    "онлайн-курси SMM та таргетингу",
-    "школа гри на гітарі онлайн",
-    "курси Excel та аналітики даних",
-    "онлайн-марафон з йоги та фітнесу",
-    "курси копірайтингу та контент-маркетингу",
-    "підготовка до IELTS/TOEFL онлайн",
-    "школа програмування для дітей (Scratch/Python)",
-]
 
-_ILLUSTRATE_SYSTEM = """Ти — досвідчений маркетолог-практик в EdTech і сильний копірайтер.
-Тобі дають список маркетингових принципів із класики інфобізу. До КОЖНОГО
-напиши РОЗГОРНУТИЙ, дуже конкретний приклад застосування в ніші онлайн-освіти,
-яку вказано в полі niche.
-
-Приклад має бути НЕ абстрактним, а «бери й роби». Обовʼязково включи конкретику:
-- персонаж і ситуація (напр. «Олена, засновниця школи іспанської»);
-- якщо мова про оффер — напиши сам оффер дослівно (назва + що входить);
-- якщо доречно — 2-4 конкретних БОНУСИ списком (напр. «розмовний клуб», «шаблони фраз», «перевірка вимови»);
-- конкретні цифри: ціна, дедлайн, гарантія, метрика до/після (напр. «конверсія 3% → 7%»);
-- за потреби — 2-3 практичних КРОКИ, що саме зробити.
-
-Стиль: українською, живо й предметно, 4-7 речень. Можна використати короткий
-список через тире всередині тексту. Без markdown-заголовків, без води.
-
-Поверни СТРОГО валідний JSON без пояснень:
-{"examples": [{"id": "<id принципу>", "example": "<розгорнутий конкретний приклад>"}]}"""
-
-
-def illustrate_evergreen(cfg: Config, insights: list[dict]) -> dict[str, str]:
+def illustrate_evergreen(cfg: Config, insights: list[dict], profile: Profile) -> dict[str, str]:
     """Для каждого инсайта генерирует живой пример под конкретную нишу.
 
-    Возвращает {id: текст примера}. При любой ошибке — пустой словарь
-    (в этом случае formatter покажет статичное поле application как запасной).
+    Промпт и список ниш берутся из профиля. Возвращает {id: текст примера};
+    при любой ошибке — пустой словарь (formatter покажет статичное application).
     """
-    if not insights:
+    if not insights or not profile.illustrate_system or not profile.niches:
         return {}
 
-    niches = random.sample(_NICHES, k=min(len(insights), len(_NICHES)))
+    niches = random.sample(profile.niches, k=min(len(insights), len(profile.niches)))
     payload = []
     for i, ins in enumerate(insights):
         payload.append({
@@ -352,7 +300,7 @@ def illustrate_evergreen(cfg: Config, insights: list[dict]) -> dict[str, str]:
     )
 
     try:
-        raw = _raw_call(cfg, _ILLUSTRATE_SYSTEM, user)
+        raw = _raw_call(cfg, profile.illustrate_system, user)
         parsed = _extract_json(raw)
     except (RuntimeError, json.JSONDecodeError) as exc:
         log.warning("Не удалось сгенерировать примеры для классики: %s", exc)

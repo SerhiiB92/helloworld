@@ -1,0 +1,77 @@
+name: GameDev Biz Digest
+
+# Ежедневный дайджест по бизнесу геймдев-индустрии в 10:00 по Варшаве.
+# Логика времени та же, что у EdTech-бота (см. digest.yml): несколько cron
+# утром + TARGET_HOUR=10 → отправка один раз в день при первом запуске ≥10:00.
+#
+# Использует ОТДЕЛЬНОГО телеграм-бота: секреты TELEGRAM_BOT_TOKEN_GAMEDEV и
+# TELEGRAM_CHAT_ID_GAMEDEV. LLM-ключи (GROQ/GEMINI) — общие с EdTech-ботом.
+
+on:
+  schedule:
+    - cron: "0 8-10 * * *"   # 08:00, 09:00, 10:00 UTC — первый запуск ≥10:00 Варшава и шлёт
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Тестовый прогон без отправки в Telegram (печать в лог)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: gamedev-digest
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: bot/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r bot/requirements.txt
+
+      - name: Run digest
+        working-directory: bot
+        env:
+          BOT_PROFILE: gamedev
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN_GAMEDEV }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID_GAMEDEV }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          LLM_PROVIDER: ${{ vars.LLM_PROVIDER || 'gemini' }}
+          DIGEST_MAX_ITEMS: ${{ vars.DIGEST_MAX_ITEMS_GAMEDEV || vars.DIGEST_MAX_ITEMS || '7' }}
+          LOOKBACK_HOURS: ${{ vars.LOOKBACK_HOURS || '48' }}
+          EVERGREEN_COUNT: ${{ vars.EVERGREEN_COUNT || '2' }}
+          TIMEZONE: ${{ vars.TIMEZONE || 'Europe/Warsaw' }}
+          TARGET_HOUR: ${{ github.event_name == 'schedule' && (vars.TARGET_HOUR || '10') || '' }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+        run: python main.py
+
+      - name: Commit updated state
+        if: ${{ !inputs.dry_run }}
+        run: |
+          STATE=bot/profiles/gamedev/state.json
+          if [[ -n "$(git status --porcelain $STATE)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add "$STATE"
+            git commit -m "chore: update gamedev digest state [skip ci]"
+            # Два бота могут коммитить одновременно — тянем с rebase и повторяем push.
+            for i in 1 2 3 4 5; do
+              git pull --rebase --autostash origin ${{ github.ref_name }} && \
+              git push origin HEAD:${{ github.ref_name }} && break || sleep 5
+            done
+          else
+            echo "state.json без изменений — коммит не нужен"
+          fi
