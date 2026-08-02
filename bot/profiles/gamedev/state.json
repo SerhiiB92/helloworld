@@ -1,5 +1,10 @@
 {
- "seen_news": [],
+ "seen_news": [
+  "7cbcea8c2968b5c0",
+  "c6c87285cbc88a58",
+  "bdd0591d4c96678d",
+  "3412d51fa412180f"
+ ],
  "seen_evergreen": [],
- "last_sent_date": ""
+ "last_sent_date": "2026-08-02"
 }
