@@ -42,11 +42,19 @@
   "3a230e0884f35625",
   "0bbc983b2d095214",
   "44b651c14ae3b232",
-  "97c7ed335e89fb4f"
+  "97c7ed335e89fb4f",
+  "bfbe2e7af073a0b6",
+  "34fadb4f21fc7e86",
+  "de95ab58744353ac",
+  "8bead5213ebb21c1",
+  "c90e18ee8e1e691b",
+  "8bd7aa0168ce7330"
  ],
  "seen_evergreen": [
   "brunson-false-beliefs",
-  "walker-mental-triggers"
+  "walker-mental-triggers",
+  "walker-seed-launch",
+  "metrics-ltv-cac"
  ],
- "last_sent_date": "2026-08-02"
+ "last_sent_date": "2026-08-03"
 }
