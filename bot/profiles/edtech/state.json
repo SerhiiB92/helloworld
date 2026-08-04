@@ -48,13 +48,20 @@
   "de95ab58744353ac",
   "8bead5213ebb21c1",
   "c90e18ee8e1e691b",
-  "8bd7aa0168ce7330"
+  "8bd7aa0168ce7330",
+  "f1c52a43382aa5e4",
+  "ac9921e5ac4c3a62",
+  "83fd151c73fe77dc",
+  "6c444cce54d762b8",
+  "00a9f19fa728cce9"
  ],
  "seen_evergreen": [
   "brunson-false-beliefs",
   "walker-mental-triggers",
   "walker-seed-launch",
-  "metrics-ltv-cac"
+  "metrics-ltv-cac",
+  "brunson-value-ladder",
+  "brunson-hook-story-offer"
  ],
- "last_sent_date": "2026-08-03"
+ "last_sent_date": "2026-08-04"
 }
