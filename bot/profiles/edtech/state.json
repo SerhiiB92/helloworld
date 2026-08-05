@@ -53,7 +53,14 @@
   "ac9921e5ac4c3a62",
   "83fd151c73fe77dc",
   "6c444cce54d762b8",
-  "00a9f19fa728cce9"
+  "00a9f19fa728cce9",
+  "2bc037d2af6264b6",
+  "f61bf9bd4c875f36",
+  "099336281e6a799b",
+  "a95b510fdbc55ca1",
+  "9876da3fc2f1e079",
+  "5aa50f6e6c969964",
+  "3de680c6e88f6f46"
  ],
  "seen_evergreen": [
   "brunson-false-beliefs",
@@ -61,7 +68,9 @@
   "walker-seed-launch",
   "metrics-ltv-cac",
   "brunson-value-ladder",
-  "brunson-hook-story-offer"
+  "brunson-hook-story-offer",
+  "creative-angle-testing",
+  "metrics-one-metric"
  ],
- "last_sent_date": "2026-08-04"
+ "last_sent_date": "2026-08-05"
 }
