@@ -60,7 +60,13 @@
   "a95b510fdbc55ca1",
   "9876da3fc2f1e079",
   "5aa50f6e6c969964",
-  "3de680c6e88f6f46"
+  "3de680c6e88f6f46",
+  "a0295ccb83eba74c",
+  "e4523dcb24b9c485",
+  "7a4f907a25bbf1b0",
+  "7a010c3e7e83052f",
+  "e25c0a3f50265be7",
+  "025763b7fc45984d"
  ],
  "seen_evergreen": [
   "brunson-false-beliefs",
@@ -70,7 +76,9 @@
   "brunson-value-ladder",
   "brunson-hook-story-offer",
   "creative-angle-testing",
-  "metrics-one-metric"
+  "metrics-one-metric",
+  "hormozi-give-give-ask",
+  "hormozi-core-four"
  ],
- "last_sent_date": "2026-08-05"
+ "last_sent_date": "2026-08-06"
 }
