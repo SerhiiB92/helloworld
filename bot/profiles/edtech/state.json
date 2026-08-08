@@ -70,7 +70,12 @@
   "6ec7308de4529c37",
   "271f905700dd0a99",
   "57921a1d4413303e",
-  "9aacc85277ee57c8"
+  "9aacc85277ee57c8",
+  "b960a5e01df96de4",
+  "12b1abf940b04c00",
+  "23005ef5857bb6da",
+  "cafa63d9faf6b41c",
+  "ce45427605c7cd41"
  ],
  "seen_evergreen": [
   "brunson-false-beliefs",
@@ -84,7 +89,9 @@
   "hormozi-give-give-ask",
   "hormozi-core-four",
   "sabri-adgrid",
-  "hormozi-value-equation"
+  "hormozi-value-equation",
+  "brunson-epiphany-bridge",
+  "creative-ugc"
  ],
- "last_sent_date": "2026-08-07"
+ "last_sent_date": "2026-08-08"
 }
