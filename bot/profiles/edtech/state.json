@@ -75,7 +75,12 @@
   "12b1abf940b04c00",
   "23005ef5857bb6da",
   "cafa63d9faf6b41c",
-  "ce45427605c7cd41"
+  "ce45427605c7cd41",
+  "ebb8d895870dc599",
+  "f8ed8937f792fd53",
+  "7db2f3c81e25cb30",
+  "b67f16612fa3e75c",
+  "f540ac779eb03c63"
  ],
  "seen_evergreen": [
   "brunson-false-beliefs",
@@ -91,7 +96,9 @@
   "sabri-adgrid",
   "hormozi-value-equation",
   "brunson-epiphany-bridge",
-  "creative-ugc"
+  "creative-ugc",
+  "walker-plf",
+  "webinar-perfect"
  ],
- "last_sent_date": "2026-08-08"
+ "last_sent_date": "2026-08-09"
 }
