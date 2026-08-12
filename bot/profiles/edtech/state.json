@@ -86,7 +86,10 @@
   "2723a9e618663ac7",
   "cb09a1096309fcb6",
   "681b72dc1862a543",
-  "839a6de8bf5d13bf"
+  "839a6de8bf5d13bf",
+  "b08d249bdd55065d",
+  "16382afac783f0f8",
+  "acc8cdd3f074961d"
  ],
  "seen_evergreen": [
   "brunson-false-beliefs",
@@ -108,7 +111,9 @@
   "brunson-attractive-character",
   "hormozi-lead-magnet",
   "cialdini-social-proof",
-  "hormozi-naming"
+  "hormozi-naming",
+  "cialdini-commitment",
+  "hormozi-guarantee"
  ],
- "last_sent_date": "2026-08-11"
+ "last_sent_date": "2026-08-12"
 }
