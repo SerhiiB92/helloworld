@@ -94,11 +94,17 @@
   "5b0235b913bbc9b7",
   "47771d92451f3fd5",
   "015ec179755e4538",
-  "eddae5895cdff190"
+  "eddae5895cdff190",
+  "d43f3ad2e89c4735",
+  "9d972b1c5bffc28a",
+  "dae1aa37265a0b7e",
+  "9d93e7f931f28abe"
  ],
  "seen_evergreen": [
   "hormozi-grand-slam",
-  "walker-sideways-letter"
+  "walker-sideways-letter",
+  "cialdini-commitment",
+  "brunson-hook-story-offer"
  ],
- "last_sent_date": "2026-08-13"
+ "last_sent_date": "2026-08-14"
 }
