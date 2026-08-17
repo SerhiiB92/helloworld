@@ -106,7 +106,13 @@
   "5a3faf9d32141ed5",
   "17e4a1928aefdba9",
   "d614065bea1192f2",
-  "cf3204f328a5318b"
+  "cf3204f328a5318b",
+  "db94528578bf8e52",
+  "01a8448036afb752",
+  "cc729c4116b94cb4",
+  "4a12e6298a8ada00",
+  "d71a56831a1e9195",
+  "452de6445e406fcc"
  ],
  "seen_evergreen": [
   "hormozi-grand-slam",
@@ -116,7 +122,9 @@
   "webinar-perfect",
   "brunson-value-ladder",
   "cialdini-social-proof",
-  "hormozi-lead-magnet"
+  "hormozi-lead-magnet",
+  "metrics-one-metric",
+  "sabri-adgrid"
  ],
- "last_sent_date": "2026-08-16"
+ "last_sent_date": "2026-08-17"
 }
