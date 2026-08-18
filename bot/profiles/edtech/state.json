@@ -112,7 +112,14 @@
   "cc729c4116b94cb4",
   "4a12e6298a8ada00",
   "d71a56831a1e9195",
-  "452de6445e406fcc"
+  "452de6445e406fcc",
+  "8a8521cdb47ad109",
+  "b67322fc163da31e",
+  "223abd3bc9e78c3b",
+  "8ea390bbc991b2da",
+  "0c0977b5dc82d4f9",
+  "d83a698ac6812f07",
+  "d927545e7710d75f"
  ],
  "seen_evergreen": [
   "hormozi-grand-slam",
@@ -124,7 +131,9 @@
   "cialdini-social-proof",
   "hormozi-lead-magnet",
   "metrics-one-metric",
-  "sabri-adgrid"
+  "sabri-adgrid",
+  "hormozi-give-give-ask",
+  "brunson-epiphany-bridge"
  ],
- "last_sent_date": "2026-08-17"
+ "last_sent_date": "2026-08-18"
 }
