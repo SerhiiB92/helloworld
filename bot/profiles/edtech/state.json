@@ -119,7 +119,14 @@
   "8ea390bbc991b2da",
   "0c0977b5dc82d4f9",
   "d83a698ac6812f07",
-  "d927545e7710d75f"
+  "d927545e7710d75f",
+  "fd33d6e93b3993e1",
+  "fe5b128e06ba583f",
+  "c921887966c07e8c",
+  "4dbdbdfe4235e7e0",
+  "4111744723a73b00",
+  "aaf6e20fec41be21",
+  "49506902f1ce00ac"
  ],
  "seen_evergreen": [
   "hormozi-grand-slam",
@@ -133,7 +140,9 @@
   "metrics-one-metric",
   "sabri-adgrid",
   "hormozi-give-give-ask",
-  "brunson-epiphany-bridge"
+  "brunson-epiphany-bridge",
+  "creative-ugc",
+  "brunson-false-beliefs"
  ],
- "last_sent_date": "2026-08-18"
+ "last_sent_date": "2026-08-19"
 }
