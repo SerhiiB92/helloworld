@@ -126,7 +126,14 @@
   "4dbdbdfe4235e7e0",
   "4111744723a73b00",
   "aaf6e20fec41be21",
-  "49506902f1ce00ac"
+  "49506902f1ce00ac",
+  "bd2d46062dfcf070",
+  "865e03269f70cbcf",
+  "084c86349ee0c519",
+  "7feb76f6d3d45803",
+  "cad02e86666eba10",
+  "b4d8e2a414343a85",
+  "38278e21732a7091"
  ],
  "seen_evergreen": [
   "hormozi-grand-slam",
@@ -142,7 +149,9 @@
   "hormozi-give-give-ask",
   "brunson-epiphany-bridge",
   "creative-ugc",
-  "brunson-false-beliefs"
+  "brunson-false-beliefs",
+  "hormozi-naming",
+  "brunson-attractive-character"
  ],
- "last_sent_date": "2026-08-19"
+ "last_sent_date": "2026-08-20"
 }
