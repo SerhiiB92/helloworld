@@ -133,7 +133,14 @@
   "7feb76f6d3d45803",
   "cad02e86666eba10",
   "b4d8e2a414343a85",
-  "38278e21732a7091"
+  "38278e21732a7091",
+  "0cd3759b05a545c6",
+  "60dde94f3f2f887b",
+  "a6eaba22b1dad85b",
+  "e32db52063389e82",
+  "dab316bd8d10ab0f",
+  "12d4dd39c5c56217",
+  "9968adb7eba75754"
  ],
  "seen_evergreen": [
   "hormozi-grand-slam",
@@ -151,7 +158,9 @@
   "creative-ugc",
   "brunson-false-beliefs",
   "hormozi-naming",
-  "brunson-attractive-character"
+  "brunson-attractive-character",
+  "walker-plf",
+  "creative-angle-testing"
  ],
- "last_sent_date": "2026-08-20"
+ "last_sent_date": "2026-08-21"
 }
