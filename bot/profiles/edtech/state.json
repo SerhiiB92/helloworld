@@ -140,7 +140,14 @@
   "e32db52063389e82",
   "dab316bd8d10ab0f",
   "12d4dd39c5c56217",
-  "9968adb7eba75754"
+  "9968adb7eba75754",
+  "5fc1792d52c84dbb",
+  "87d2b3295d7d946c",
+  "8a90923fe8abf177",
+  "54d94c06abc17219",
+  "61a07e5eddf2720a",
+  "51bd9dd67b81b1e5",
+  "1d55b580021c2989"
  ],
  "seen_evergreen": [
   "hormozi-grand-slam",
@@ -160,7 +167,9 @@
   "hormozi-naming",
   "brunson-attractive-character",
   "walker-plf",
-  "creative-angle-testing"
+  "creative-angle-testing",
+  "metrics-ltv-cac",
+  "hormozi-core-four"
  ],
- "last_sent_date": "2026-08-21"
+ "last_sent_date": "2026-08-22"
 }
