@@ -161,11 +161,20 @@
   "ad30182a98303c6e",
   "1b81e77c8a616fad",
   "46114817a4c37e60",
-  "8ea017bff75c8b3c"
+  "8ea017bff75c8b3c",
+  "eea6a544b711a048",
+  "9d3a87314a3e5a72",
+  "7b11434d8168a812",
+  "667955def7c44741",
+  "ceea1904d5f3e766",
+  "a29ed1e1a10ba23e",
+  "adca71b66f894f37"
  ],
  "seen_evergreen": [
   "hormozi-guarantee",
-  "walker-mental-triggers"
+  "walker-mental-triggers",
+  "walker-plf",
+  "brunson-value-ladder"
  ],
- "last_sent_date": "2026-08-24"
+ "last_sent_date": "2026-08-25"
 }
