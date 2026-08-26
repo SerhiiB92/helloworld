@@ -168,13 +168,22 @@
   "667955def7c44741",
   "ceea1904d5f3e766",
   "a29ed1e1a10ba23e",
-  "adca71b66f894f37"
+  "adca71b66f894f37",
+  "811994b2ad1f0d92",
+  "6544c8e9b163320c",
+  "6363674064f4ac3a",
+  "70144f8a876a3da3",
+  "26dc0e045f05d30e",
+  "85f21453746c666f",
+  "bc8edc52170e1390"
  ],
  "seen_evergreen": [
   "hormozi-guarantee",
   "walker-mental-triggers",
   "walker-plf",
-  "brunson-value-ladder"
+  "brunson-value-ladder",
+  "brunson-epiphany-bridge",
+  "walker-sideways-letter"
  ],
- "last_sent_date": "2026-08-25"
+ "last_sent_date": "2026-08-26"
 }
