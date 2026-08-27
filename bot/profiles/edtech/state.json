@@ -175,7 +175,14 @@
   "70144f8a876a3da3",
   "26dc0e045f05d30e",
   "85f21453746c666f",
-  "bc8edc52170e1390"
+  "bc8edc52170e1390",
+  "f721f86d4fb72c19",
+  "8ede0d2a38466485",
+  "f53a550e2f342b35",
+  "945208c98a7365ec",
+  "2a8fb60f0b696a9c",
+  "e34d7ebe3168231d",
+  "6a397b509cc9e5db"
  ],
  "seen_evergreen": [
   "hormozi-guarantee",
@@ -183,7 +190,9 @@
   "walker-plf",
   "brunson-value-ladder",
   "brunson-epiphany-bridge",
-  "walker-sideways-letter"
+  "walker-sideways-letter",
+  "hormozi-give-give-ask",
+  "hormozi-grand-slam"
  ],
- "last_sent_date": "2026-08-26"
+ "last_sent_date": "2026-08-27"
 }
