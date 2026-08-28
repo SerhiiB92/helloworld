@@ -182,7 +182,14 @@
   "945208c98a7365ec",
   "2a8fb60f0b696a9c",
   "e34d7ebe3168231d",
-  "6a397b509cc9e5db"
+  "6a397b509cc9e5db",
+  "64f201ad275b6a75",
+  "fa3697c1831e9aad",
+  "ab5db71e7d753b9f",
+  "1d33875cdbed556f",
+  "23ed10608393e79a",
+  "39a3ac690faf9002",
+  "9014286be44a5914"
  ],
  "seen_evergreen": [
   "hormozi-guarantee",
@@ -192,7 +199,9 @@
   "brunson-epiphany-bridge",
   "walker-sideways-letter",
   "hormozi-give-give-ask",
-  "hormozi-grand-slam"
+  "hormozi-grand-slam",
+  "webinar-perfect",
+  "metrics-ltv-cac"
  ],
- "last_sent_date": "2026-08-27"
+ "last_sent_date": "2026-08-28"
 }
