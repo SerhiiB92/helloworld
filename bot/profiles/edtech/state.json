@@ -189,7 +189,14 @@
   "1d33875cdbed556f",
   "23ed10608393e79a",
   "39a3ac690faf9002",
-  "9014286be44a5914"
+  "9014286be44a5914",
+  "699cf692425f7414",
+  "fcab46c772d62c24",
+  "85caa862c50ba08d",
+  "28ad99603919d08a",
+  "57b486439fa88f2e",
+  "90212fc2f86b43e3",
+  "7c4453403dee4c78"
  ],
  "seen_evergreen": [
   "hormozi-guarantee",
@@ -201,7 +208,9 @@
   "hormozi-give-give-ask",
   "hormozi-grand-slam",
   "webinar-perfect",
-  "metrics-ltv-cac"
+  "metrics-ltv-cac",
+  "hormozi-lead-magnet",
+  "walker-seed-launch"
  ],
- "last_sent_date": "2026-08-28"
+ "last_sent_date": "2026-08-29"
 }
