@@ -203,7 +203,14 @@
   "cc1642858dfb6311",
   "a22ff56152ae829a",
   "d19102552ee92875",
-  "be0797327273e02d"
+  "be0797327273e02d",
+  "eea8e8095ebed1fa",
+  "5aa7b73fb32ca8a2",
+  "2df00cf6406140d1",
+  "53b0ec52fb8be7f7",
+  "04ae2200c81da237",
+  "f829906a450753a0",
+  "fcb1a61679ee7d8d"
  ],
  "seen_evergreen": [
   "hormozi-guarantee",
@@ -219,7 +226,9 @@
   "hormozi-lead-magnet",
   "walker-seed-launch",
   "sabri-adgrid",
-  "cialdini-social-proof"
+  "cialdini-social-proof",
+  "hormozi-naming",
+  "brunson-attractive-character"
  ],
- "last_sent_date": "2026-08-30"
+ "last_sent_date": "2026-08-31"
 }
