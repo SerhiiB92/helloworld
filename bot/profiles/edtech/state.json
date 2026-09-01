@@ -210,7 +210,14 @@
   "53b0ec52fb8be7f7",
   "04ae2200c81da237",
   "f829906a450753a0",
-  "fcb1a61679ee7d8d"
+  "fcb1a61679ee7d8d",
+  "a453c181d2a8df53",
+  "b9150510b07f7ff8",
+  "bfc62a325f6c7029",
+  "980e1044df6f6d8f",
+  "10e339ff89fa432a",
+  "1e78dc7a85096d8e",
+  "24fa92d850c05b34"
  ],
  "seen_evergreen": [
   "hormozi-guarantee",
@@ -228,7 +235,9 @@
   "sabri-adgrid",
   "cialdini-social-proof",
   "hormozi-naming",
-  "brunson-attractive-character"
+  "brunson-attractive-character",
+  "creative-ugc",
+  "metrics-one-metric"
  ],
- "last_sent_date": "2026-08-31"
+ "last_sent_date": "2026-09-01"
 }
