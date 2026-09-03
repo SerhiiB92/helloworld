@@ -224,7 +224,14 @@
   "51c884ac3af28429",
   "3882904b5c13005b",
   "1d8efc217d4b1ad5",
-  "d2ef223b7b1dbf90"
+  "d2ef223b7b1dbf90",
+  "1f4bf4f0a4f809b9",
+  "3f86b8f4c03536a8",
+  "94f5ac1861dacaac",
+  "75f2ae749f11d3b6",
+  "d06781dac8e9d9b6",
+  "2efb6805c75c4207",
+  "69acc863f455b33f"
  ],
  "seen_evergreen": [
   "hormozi-guarantee",
@@ -246,7 +253,9 @@
   "creative-ugc",
   "metrics-one-metric",
   "hormozi-core-four",
-  "cialdini-commitment"
+  "cialdini-commitment",
+  "brunson-false-beliefs",
+  "creative-angle-testing"
  ],
- "last_sent_date": "2026-09-02"
+ "last_sent_date": "2026-09-03"
 }
