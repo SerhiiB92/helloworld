@@ -252,7 +252,14 @@
   "445d28f567027a2f",
   "e41e464745539be4",
   "cdbde50c4fecee32",
-  "b51a793cf6bdd054"
+  "b51a793cf6bdd054",
+  "c7987b54701bc4f4",
+  "4024766a812fc417",
+  "9b97898ec0c2e446",
+  "09b1783c696ca3d5",
+  "6da9813c4b1352e6",
+  "a43cd86f175bca31",
+  "c18d5ec3576ee61d"
  ],
  "seen_evergreen": [
   "hormozi-value-equation",
@@ -260,7 +267,9 @@
   "brunson-epiphany-bridge",
   "hormozi-lead-magnet",
   "creative-ugc",
-  "hormozi-core-four"
+  "hormozi-core-four",
+  "creative-angle-testing",
+  "metrics-one-metric"
  ],
- "last_sent_date": "2026-09-06"
+ "last_sent_date": "2026-09-07"
 }
