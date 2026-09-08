@@ -259,7 +259,14 @@
   "09b1783c696ca3d5",
   "6da9813c4b1352e6",
   "a43cd86f175bca31",
-  "c18d5ec3576ee61d"
+  "c18d5ec3576ee61d",
+  "512c8b06fa7a5366",
+  "a7dff3bc4916ba07",
+  "0b90f20bbc8cfdee",
+  "c66c6f769c50e125",
+  "5e87314fa52e8826",
+  "0b646935ea69a915",
+  "d8eee830a704d6b1"
  ],
  "seen_evergreen": [
   "hormozi-value-equation",
@@ -269,7 +276,9 @@
   "creative-ugc",
   "hormozi-core-four",
   "creative-angle-testing",
-  "metrics-one-metric"
+  "metrics-one-metric",
+  "cialdini-commitment",
+  "brunson-value-ladder"
  ],
- "last_sent_date": "2026-09-07"
+ "last_sent_date": "2026-09-08"
 }
