@@ -266,7 +266,14 @@
   "c66c6f769c50e125",
   "5e87314fa52e8826",
   "0b646935ea69a915",
-  "d8eee830a704d6b1"
+  "d8eee830a704d6b1",
+  "fee0f0ce068c009a",
+  "23af3d6e9000a9e4",
+  "608d185616affe42",
+  "c514e676ea5fe58c",
+  "8077359dae3d496c",
+  "450bf0ab3e695425",
+  "23b2f87a8c8f750b"
  ],
  "seen_evergreen": [
   "hormozi-value-equation",
@@ -278,7 +285,9 @@
   "creative-angle-testing",
   "metrics-one-metric",
   "cialdini-commitment",
-  "brunson-value-ladder"
+  "brunson-value-ladder",
+  "webinar-perfect",
+  "hormozi-grand-slam"
  ],
- "last_sent_date": "2026-09-08"
+ "last_sent_date": "2026-09-09"
 }
