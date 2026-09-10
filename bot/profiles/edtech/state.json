@@ -273,7 +273,14 @@
   "c514e676ea5fe58c",
   "8077359dae3d496c",
   "450bf0ab3e695425",
-  "23b2f87a8c8f750b"
+  "23b2f87a8c8f750b",
+  "33e79afef1493085",
+  "84ae83639e15205f",
+  "9650fde104df9df8",
+  "b92f08287d3b931a",
+  "4b0f84982c556bd8",
+  "1f7df89d5c7ed71c",
+  "3736a58269fead63"
  ],
  "seen_evergreen": [
   "hormozi-value-equation",
@@ -287,7 +294,9 @@
   "cialdini-commitment",
   "brunson-value-ladder",
   "webinar-perfect",
-  "hormozi-grand-slam"
+  "hormozi-grand-slam",
+  "metrics-ltv-cac",
+  "hormozi-give-give-ask"
  ],
- "last_sent_date": "2026-09-09"
+ "last_sent_date": "2026-09-10"
 }
