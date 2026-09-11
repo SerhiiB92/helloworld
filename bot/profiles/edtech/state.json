@@ -280,7 +280,14 @@
   "b92f08287d3b931a",
   "4b0f84982c556bd8",
   "1f7df89d5c7ed71c",
-  "3736a58269fead63"
+  "3736a58269fead63",
+  "61ce6ab9f1385fc1",
+  "a4eafc1caf43288c",
+  "c9043a49f459a1de",
+  "4ac64e31d9393aa3",
+  "57917d98dc822f5a",
+  "869fe810f6ed9600",
+  "d9383b15fc00ea43"
  ],
  "seen_evergreen": [
   "hormozi-value-equation",
@@ -296,7 +303,9 @@
   "webinar-perfect",
   "hormozi-grand-slam",
   "metrics-ltv-cac",
-  "hormozi-give-give-ask"
+  "hormozi-give-give-ask",
+  "brunson-false-beliefs",
+  "hormozi-naming"
  ],
- "last_sent_date": "2026-09-10"
+ "last_sent_date": "2026-09-11"
 }
