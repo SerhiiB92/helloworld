@@ -287,7 +287,14 @@
   "4ac64e31d9393aa3",
   "57917d98dc822f5a",
   "869fe810f6ed9600",
-  "d9383b15fc00ea43"
+  "d9383b15fc00ea43",
+  "4c4e6f8bdacad6ac",
+  "507fc8813bec6ab2",
+  "809ce260c908cd3c",
+  "fb312d66af7541ca",
+  "2d500b6355747a97",
+  "be2fe80d23c709f8",
+  "c4a5eebf9085d110"
  ],
  "seen_evergreen": [
   "hormozi-value-equation",
@@ -305,7 +312,9 @@
   "metrics-ltv-cac",
   "hormozi-give-give-ask",
   "brunson-false-beliefs",
-  "hormozi-naming"
+  "hormozi-naming",
+  "hormozi-guarantee",
+  "sabri-adgrid"
  ],
- "last_sent_date": "2026-09-11"
+ "last_sent_date": "2026-09-12"
 }
