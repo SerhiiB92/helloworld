@@ -294,7 +294,14 @@
   "fb312d66af7541ca",
   "2d500b6355747a97",
   "be2fe80d23c709f8",
-  "c4a5eebf9085d110"
+  "c4a5eebf9085d110",
+  "f6244914a33e7bf7",
+  "7664ba0e63496133",
+  "f45eb55710b4e588",
+  "c0f8040236cf0b18",
+  "aa88f7ec66645242",
+  "d77151eeaf7150ee",
+  "a5a2b217679e9784"
  ],
  "seen_evergreen": [
   "hormozi-value-equation",
@@ -314,7 +321,9 @@
   "brunson-false-beliefs",
   "hormozi-naming",
   "hormozi-guarantee",
-  "sabri-adgrid"
+  "sabri-adgrid",
+  "walker-mental-triggers",
+  "cialdini-social-proof"
  ],
- "last_sent_date": "2026-09-12"
+ "last_sent_date": "2026-09-13"
 }
