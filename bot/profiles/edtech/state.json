@@ -301,7 +301,14 @@
   "c0f8040236cf0b18",
   "aa88f7ec66645242",
   "d77151eeaf7150ee",
-  "a5a2b217679e9784"
+  "a5a2b217679e9784",
+  "a518f30a5cf3ce82",
+  "1be2f3dfaa6eb5a6",
+  "1b08251b3a3e283d",
+  "729a0cb0dfefb6a9",
+  "04e889080cfa50a3",
+  "bcd12a9441566a7f",
+  "bee2d183271629dd"
  ],
  "seen_evergreen": [
   "hormozi-value-equation",
@@ -323,7 +330,9 @@
   "hormozi-guarantee",
   "sabri-adgrid",
   "walker-mental-triggers",
-  "cialdini-social-proof"
+  "cialdini-social-proof",
+  "walker-plf",
+  "brunson-attractive-character"
  ],
- "last_sent_date": "2026-09-13"
+ "last_sent_date": "2026-09-14"
 }
