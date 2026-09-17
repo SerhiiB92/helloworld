@@ -322,13 +322,22 @@
   "16ef8e5b023e53a4",
   "84ff9ca913d0940c",
   "b5be02919688052f",
-  "0e61de0b5dea002f"
+  "0e61de0b5dea002f",
+  "01315d40ae8e957c",
+  "c5ea2af675ff1553",
+  "ddab118f522d6ff5",
+  "55dc446e1eee8958",
+  "2a987d2b9060759d",
+  "ece25d01ab2510e7",
+  "316c66eeafda4e85"
  ],
  "seen_evergreen": [
   "walker-seed-launch",
   "walker-sideways-letter",
   "brunson-hook-story-offer",
-  "cialdini-commitment"
+  "cialdini-commitment",
+  "cialdini-social-proof",
+  "hormozi-grand-slam"
  ],
- "last_sent_date": "2026-09-16"
+ "last_sent_date": "2026-09-17"
 }
