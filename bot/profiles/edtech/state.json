@@ -329,7 +329,14 @@
   "55dc446e1eee8958",
   "2a987d2b9060759d",
   "ece25d01ab2510e7",
-  "316c66eeafda4e85"
+  "316c66eeafda4e85",
+  "be8b1ec87afea604",
+  "ed439fcda079f387",
+  "a22ad89667c64704",
+  "543c7bdc47612542",
+  "54d786f331054db1",
+  "61365850a15a7323",
+  "a994386ddfe7e506"
  ],
  "seen_evergreen": [
   "walker-seed-launch",
@@ -337,7 +344,9 @@
   "brunson-hook-story-offer",
   "cialdini-commitment",
   "cialdini-social-proof",
-  "hormozi-grand-slam"
+  "hormozi-grand-slam",
+  "creative-angle-testing",
+  "walker-plf"
  ],
- "last_sent_date": "2026-09-17"
+ "last_sent_date": "2026-09-18"
 }
