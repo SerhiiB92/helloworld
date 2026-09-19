@@ -336,7 +336,14 @@
   "543c7bdc47612542",
   "54d786f331054db1",
   "61365850a15a7323",
-  "a994386ddfe7e506"
+  "a994386ddfe7e506",
+  "327b40bbd3db968e",
+  "6de0693197198532",
+  "7aa0feb1f5d2da05",
+  "4c4742a9af49e28e",
+  "7b9a0502f1a1b387",
+  "2bceea61baa15b04",
+  "cc6a9fb4721a93e4"
  ],
  "seen_evergreen": [
   "walker-seed-launch",
@@ -346,7 +353,9 @@
   "cialdini-social-proof",
   "hormozi-grand-slam",
   "creative-angle-testing",
-  "walker-plf"
+  "walker-plf",
+  "brunson-attractive-character",
+  "hormozi-core-four"
  ],
- "last_sent_date": "2026-09-18"
+ "last_sent_date": "2026-09-19"
 }
