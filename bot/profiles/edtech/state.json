@@ -350,7 +350,14 @@
   "e9969298927e3a5e",
   "0261d9a19e944aa4",
   "b5fa11ba67f32798",
-  "6a633a5e6e3fe17c"
+  "6a633a5e6e3fe17c",
+  "9916c1238b1f2466",
+  "51d2b9e0bc606ab4",
+  "1999c9bbf994bdba",
+  "f79b891327d81809",
+  "98287be04595dfe8",
+  "0ac3c36a97a80521",
+  "6faee8f2ec08f7cd"
  ],
  "seen_evergreen": [
   "walker-seed-launch",
@@ -364,7 +371,9 @@
   "brunson-attractive-character",
   "hormozi-core-four",
   "metrics-one-metric",
-  "hormozi-naming"
+  "hormozi-naming",
+  "hormozi-give-give-ask",
+  "hormozi-guarantee"
  ],
- "last_sent_date": "2026-09-20"
+ "last_sent_date": "2026-09-21"
 }
