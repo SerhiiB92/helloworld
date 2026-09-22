@@ -357,7 +357,14 @@
   "f79b891327d81809",
   "98287be04595dfe8",
   "0ac3c36a97a80521",
-  "6faee8f2ec08f7cd"
+  "6faee8f2ec08f7cd",
+  "d732dc5f1f3b3222",
+  "b44383968111d83d",
+  "b9f8ca9f18f152be",
+  "9de884b22cb0f4d0",
+  "b4fe94633c02a535",
+  "e0a602e11094c168",
+  "749b764d663e533b"
  ],
  "seen_evergreen": [
   "walker-seed-launch",
@@ -373,7 +380,9 @@
   "metrics-one-metric",
   "hormozi-naming",
   "hormozi-give-give-ask",
-  "hormozi-guarantee"
+  "hormozi-guarantee",
+  "brunson-false-beliefs",
+  "hormozi-lead-magnet"
  ],
- "last_sent_date": "2026-09-21"
+ "last_sent_date": "2026-09-22"
 }
