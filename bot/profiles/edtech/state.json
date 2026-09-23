@@ -364,7 +364,14 @@
   "9de884b22cb0f4d0",
   "b4fe94633c02a535",
   "e0a602e11094c168",
-  "749b764d663e533b"
+  "749b764d663e533b",
+  "11886e6caa03515d",
+  "a4c404438949e60f",
+  "bf4f61636c0388bb",
+  "a72cb58bcdc347f9",
+  "0a85addaeb92075f",
+  "ba6154ce8f7ade37",
+  "9186c552e81fee2e"
  ],
  "seen_evergreen": [
   "walker-seed-launch",
@@ -382,7 +389,9 @@
   "hormozi-give-give-ask",
   "hormozi-guarantee",
   "brunson-false-beliefs",
-  "hormozi-lead-magnet"
+  "hormozi-lead-magnet",
+  "sabri-adgrid",
+  "webinar-perfect"
  ],
- "last_sent_date": "2026-09-22"
+ "last_sent_date": "2026-09-23"
 }
