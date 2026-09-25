@@ -378,7 +378,14 @@
   "ecb0c2ec5da1c1cd",
   "bfe603710ac231c0",
   "464e294aeb9eb2ef",
-  "df83eb30c0c78020"
+  "df83eb30c0c78020",
+  "3002b6272bdb1fcc",
+  "de844b739a418346",
+  "6d72e750e902fae3",
+  "fc7e0673aa96b57c",
+  "06ab17a14f148d6d",
+  "87477104afb2a17b",
+  "55dcbee9b6014730"
  ],
  "seen_evergreen": [
   "walker-seed-launch",
@@ -400,7 +407,9 @@
   "sabri-adgrid",
   "webinar-perfect",
   "brunson-epiphany-bridge",
-  "hormozi-value-equation"
+  "hormozi-value-equation",
+  "creative-ugc",
+  "metrics-ltv-cac"
  ],
- "last_sent_date": "2026-09-24"
+ "last_sent_date": "2026-09-25"
 }
