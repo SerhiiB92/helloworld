@@ -399,13 +399,22 @@
   "41ff253d5fb24c7b",
   "3d0241ba9a0bc3bd",
   "c4ae5dd157d5585e",
-  "f516ac6725900eb3"
+  "f516ac6725900eb3",
+  "41d2cfc41b85694f",
+  "9468ac72e68f87ff",
+  "ff0bcf88e4c224a7",
+  "db529d40fda49dfe",
+  "4ca164dee5b3fd98",
+  "56c8153bfaedecad",
+  "9d1cb706fad91465"
  ],
  "seen_evergreen": [
   "brunson-value-ladder",
   "walker-mental-triggers",
   "hormozi-guarantee",
-  "hormozi-value-equation"
+  "hormozi-value-equation",
+  "hormozi-core-four",
+  "metrics-ltv-cac"
  ],
- "last_sent_date": "2026-09-27"
+ "last_sent_date": "2026-09-28"
 }
