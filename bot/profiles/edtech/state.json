@@ -406,7 +406,14 @@
   "db529d40fda49dfe",
   "4ca164dee5b3fd98",
   "56c8153bfaedecad",
-  "9d1cb706fad91465"
+  "9d1cb706fad91465",
+  "25466307a9a5f210",
+  "8a5a9636a62d9de3",
+  "317dfa4e2e96fe52",
+  "810c1e47db206bb2",
+  "d8fe01902e065b90",
+  "3facd4fc8fd28546",
+  "9c3089af1016d9b1"
  ],
  "seen_evergreen": [
   "brunson-value-ladder",
@@ -414,7 +421,9 @@
   "hormozi-guarantee",
   "hormozi-value-equation",
   "hormozi-core-four",
-  "metrics-ltv-cac"
+  "metrics-ltv-cac",
+  "creative-ugc",
+  "hormozi-lead-magnet"
  ],
- "last_sent_date": "2026-09-28"
+ "last_sent_date": "2026-09-29"
 }
