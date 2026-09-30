@@ -413,7 +413,14 @@
   "810c1e47db206bb2",
   "d8fe01902e065b90",
   "3facd4fc8fd28546",
-  "9c3089af1016d9b1"
+  "9c3089af1016d9b1",
+  "205cd7b0f57e6045",
+  "b0c9a11076c02c03",
+  "59d67c5fa236195a",
+  "fb5d27e79a4f76a8",
+  "32d62dfb491723bc",
+  "49a2db8a73a31804",
+  "c5a0c13d825a343c"
  ],
  "seen_evergreen": [
   "brunson-value-ladder",
@@ -423,7 +430,9 @@
   "hormozi-core-four",
   "metrics-ltv-cac",
   "creative-ugc",
-  "hormozi-lead-magnet"
+  "hormozi-lead-magnet",
+  "hormozi-grand-slam",
+  "brunson-epiphany-bridge"
  ],
- "last_sent_date": "2026-09-29"
+ "last_sent_date": "2026-09-30"
 }
