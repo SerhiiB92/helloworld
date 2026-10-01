@@ -420,7 +420,14 @@
   "fb5d27e79a4f76a8",
   "32d62dfb491723bc",
   "49a2db8a73a31804",
-  "c5a0c13d825a343c"
+  "c5a0c13d825a343c",
+  "ef5309d097eff16b",
+  "d334f164f9547902",
+  "a20a8e5cc6ff306d",
+  "1e48c71904af807a",
+  "fd0e7f260db1a5b8",
+  "fd16a2b69a517e1f",
+  "455c52ce53e988c1"
  ],
  "seen_evergreen": [
   "brunson-value-ladder",
@@ -432,7 +439,9 @@
   "creative-ugc",
   "hormozi-lead-magnet",
   "hormozi-grand-slam",
-  "brunson-epiphany-bridge"
+  "brunson-epiphany-bridge",
+  "creative-angle-testing",
+  "walker-plf"
  ],
- "last_sent_date": "2026-09-30"
+ "last_sent_date": "2026-10-01"
 }
