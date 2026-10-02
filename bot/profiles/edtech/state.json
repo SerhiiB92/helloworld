@@ -427,7 +427,14 @@
   "1e48c71904af807a",
   "fd0e7f260db1a5b8",
   "fd16a2b69a517e1f",
-  "455c52ce53e988c1"
+  "455c52ce53e988c1",
+  "4130788f12c57a90",
+  "ab05963c347a694c",
+  "5a925ff71e2344b2",
+  "99d8dfa43c4263d3",
+  "55e8950aff098c2a",
+  "dc2330c2927d2b9d",
+  "d09579a24889c00d"
  ],
  "seen_evergreen": [
   "brunson-value-ladder",
@@ -441,7 +448,9 @@
   "hormozi-grand-slam",
   "brunson-epiphany-bridge",
   "creative-angle-testing",
-  "walker-plf"
+  "walker-plf",
+  "brunson-attractive-character",
+  "metrics-one-metric"
  ],
- "last_sent_date": "2026-10-01"
+ "last_sent_date": "2026-10-02"
 }
