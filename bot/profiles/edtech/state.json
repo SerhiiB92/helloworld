@@ -434,7 +434,14 @@
   "99d8dfa43c4263d3",
   "55e8950aff098c2a",
   "dc2330c2927d2b9d",
-  "d09579a24889c00d"
+  "d09579a24889c00d",
+  "92ca2af1380a174e",
+  "0d87d78be8bc20a2",
+  "ca4526b2005db8cc",
+  "da2bdf36994851e7",
+  "6d9cb75320406296",
+  "707eef60cca8aa08",
+  "6c3bc39189ea2152"
  ],
  "seen_evergreen": [
   "brunson-value-ladder",
@@ -450,7 +457,9 @@
   "creative-angle-testing",
   "walker-plf",
   "brunson-attractive-character",
-  "metrics-one-metric"
+  "metrics-one-metric",
+  "sabri-adgrid",
+  "brunson-false-beliefs"
  ],
- "last_sent_date": "2026-10-02"
+ "last_sent_date": "2026-10-03"
 }
