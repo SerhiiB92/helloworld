@@ -441,7 +441,14 @@
   "da2bdf36994851e7",
   "6d9cb75320406296",
   "707eef60cca8aa08",
-  "6c3bc39189ea2152"
+  "6c3bc39189ea2152",
+  "a009ec72dc401e36",
+  "cb868abf42358186",
+  "5e97a4e149f95703",
+  "3894cb5959113ef1",
+  "9d9eb7b76242a7cd",
+  "8294b22b8fae2e89",
+  "521e83d27a66d810"
  ],
  "seen_evergreen": [
   "brunson-value-ladder",
@@ -459,7 +466,9 @@
   "brunson-attractive-character",
   "metrics-one-metric",
   "sabri-adgrid",
-  "brunson-false-beliefs"
+  "brunson-false-beliefs",
+  "cialdini-commitment",
+  "hormozi-give-give-ask"
  ],
- "last_sent_date": "2026-10-03"
+ "last_sent_date": "2026-10-04"
 }
