@@ -448,7 +448,14 @@
   "3894cb5959113ef1",
   "9d9eb7b76242a7cd",
   "8294b22b8fae2e89",
-  "521e83d27a66d810"
+  "521e83d27a66d810",
+  "3a0b8bc1420ad21a",
+  "7a1cd6d2f0a23b11",
+  "57ba3b4a69ca792c",
+  "ac0b936ed2b7ce14",
+  "b98425c43d7f1464",
+  "a3cfe08c7557e821",
+  "5c60a4d369dc2769"
  ],
  "seen_evergreen": [
   "brunson-value-ladder",
@@ -468,7 +475,9 @@
   "sabri-adgrid",
   "brunson-false-beliefs",
   "cialdini-commitment",
-  "hormozi-give-give-ask"
+  "hormozi-give-give-ask",
+  "cialdini-social-proof",
+  "hormozi-naming"
  ],
- "last_sent_date": "2026-10-04"
+ "last_sent_date": "2026-10-05"
 }
