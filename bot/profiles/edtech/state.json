@@ -455,7 +455,14 @@
   "ac0b936ed2b7ce14",
   "b98425c43d7f1464",
   "a3cfe08c7557e821",
-  "5c60a4d369dc2769"
+  "5c60a4d369dc2769",
+  "7aadc7e2429fd9b7",
+  "464e0e99f686b8db",
+  "e1716d40b159a408",
+  "4f1bd75241cd2904",
+  "f5f0e7460d7ac008",
+  "11eaf332b284b0f7",
+  "1a3a5c383a78a0a4"
  ],
  "seen_evergreen": [
   "brunson-value-ladder",
@@ -477,7 +484,9 @@
   "cialdini-commitment",
   "hormozi-give-give-ask",
   "cialdini-social-proof",
-  "hormozi-naming"
+  "hormozi-naming",
+  "brunson-hook-story-offer",
+  "walker-sideways-letter"
  ],
- "last_sent_date": "2026-10-05"
+ "last_sent_date": "2026-10-06"
 }
