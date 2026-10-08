@@ -469,11 +469,20 @@
   "3e1b537c2b2beaff",
   "d48746117312689c",
   "c32be4e04558bd62",
-  "ffeac6bfd18024bb"
+  "ffeac6bfd18024bb",
+  "01943a1a47d43d94",
+  "66d5fa9908ffde34",
+  "102d50d1a67b67e9",
+  "c8f974208d4acf9f",
+  "3a82312b1baa7db9",
+  "2c1b2fa62336f262",
+  "99ceff6265883a62"
  ],
  "seen_evergreen": [
   "walker-seed-launch",
-  "webinar-perfect"
+  "webinar-perfect",
+  "walker-plf",
+  "creative-ugc"
  ],
- "last_sent_date": "2026-10-07"
+ "last_sent_date": "2026-10-08"
 }
