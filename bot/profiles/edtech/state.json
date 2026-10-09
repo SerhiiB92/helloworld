@@ -476,13 +476,22 @@
   "c8f974208d4acf9f",
   "3a82312b1baa7db9",
   "2c1b2fa62336f262",
-  "99ceff6265883a62"
+  "99ceff6265883a62",
+  "69910ea0c2d72519",
+  "1d4d64756e685c50",
+  "99292b888210d9d2",
+  "8098658c256331fa",
+  "d68094321bc6288d",
+  "76e4ba535c4c98bf",
+  "683a0eeaba665bdb"
  ],
  "seen_evergreen": [
   "walker-seed-launch",
   "webinar-perfect",
   "walker-plf",
-  "creative-ugc"
+  "creative-ugc",
+  "hormozi-grand-slam",
+  "metrics-one-metric"
  ],
- "last_sent_date": "2026-10-08"
+ "last_sent_date": "2026-10-09"
 }
