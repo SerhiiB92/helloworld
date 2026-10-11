@@ -490,7 +490,14 @@
   "5998e2e286b8eb77",
   "e40ff528153197a0",
   "fb1ed000606c03a7",
-  "44744412502f5c93"
+  "44744412502f5c93",
+  "579a4e73a493cec9",
+  "5c0aa024256e7738",
+  "33fbde4384062894",
+  "e8d776f3509a7a41",
+  "311a5ddf3b35fec3",
+  "36b5f020b604191c",
+  "10e18abe60ef060b"
  ],
  "seen_evergreen": [
   "walker-seed-launch",
@@ -500,7 +507,9 @@
   "hormozi-grand-slam",
   "metrics-one-metric",
   "cialdini-commitment",
-  "brunson-value-ladder"
+  "brunson-value-ladder",
+  "hormozi-give-give-ask",
+  "brunson-false-beliefs"
  ],
- "last_sent_date": "2026-10-10"
+ "last_sent_date": "2026-10-11"
 }
