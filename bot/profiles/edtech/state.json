@@ -497,7 +497,14 @@
   "e8d776f3509a7a41",
   "311a5ddf3b35fec3",
   "36b5f020b604191c",
-  "10e18abe60ef060b"
+  "10e18abe60ef060b",
+  "43c8123440972274",
+  "1c24d2ea53668202",
+  "156c6deb2ceaab4e",
+  "e48a93b4984883e7",
+  "71b052a8c9d5e199",
+  "659f9eac041bccbf",
+  "ccfdb2fd4e76bf6c"
  ],
  "seen_evergreen": [
   "walker-seed-launch",
@@ -509,7 +516,9 @@
   "cialdini-commitment",
   "brunson-value-ladder",
   "hormozi-give-give-ask",
-  "brunson-false-beliefs"
+  "brunson-false-beliefs",
+  "walker-sideways-letter",
+  "hormozi-guarantee"
  ],
- "last_sent_date": "2026-10-11"
+ "last_sent_date": "2026-10-12"
 }
