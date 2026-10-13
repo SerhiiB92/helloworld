@@ -504,7 +504,14 @@
   "e48a93b4984883e7",
   "71b052a8c9d5e199",
   "659f9eac041bccbf",
-  "ccfdb2fd4e76bf6c"
+  "ccfdb2fd4e76bf6c",
+  "f38ca04e45c9e841",
+  "f3ee89abea7b0bcb",
+  "cf85d09cfedb1807",
+  "e99657eaae218a6c",
+  "4e6b098db158854a",
+  "7321040d08f6c6ec",
+  "70e28fb4abe45813"
  ],
  "seen_evergreen": [
   "walker-seed-launch",
@@ -518,7 +525,9 @@
   "hormozi-give-give-ask",
   "brunson-false-beliefs",
   "walker-sideways-letter",
-  "hormozi-guarantee"
+  "hormozi-guarantee",
+  "hormozi-lead-magnet",
+  "hormozi-naming"
  ],
- "last_sent_date": "2026-10-12"
+ "last_sent_date": "2026-10-13"
 }
