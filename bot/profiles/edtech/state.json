@@ -518,7 +518,14 @@
   "74fb22cdfb0e24ad",
   "525ccbf456977f39",
   "24e72d819b914da0",
-  "c104d925a2a87d85"
+  "c104d925a2a87d85",
+  "ea31a2fa789865f0",
+  "b68c06eb2c558a85",
+  "2b50072bc7285207",
+  "0ab1bde76c0de91e",
+  "5a7da56087e88beb",
+  "4ccfa2327634c4b9",
+  "7002e9e05ee7aa68"
  ],
  "seen_evergreen": [
   "walker-seed-launch",
@@ -536,7 +543,9 @@
   "hormozi-lead-magnet",
   "hormozi-naming",
   "creative-angle-testing",
-  "metrics-ltv-cac"
+  "metrics-ltv-cac",
+  "hormozi-core-four",
+  "walker-mental-triggers"
  ],
- "last_sent_date": "2026-10-14"
+ "last_sent_date": "2026-10-15"
 }
