@@ -532,7 +532,14 @@
   "e0231d9374a705ed",
   "950ef0777571c1e9",
   "26b9d3977e0f6dc3",
-  "17d48f6dda4bdadd"
+  "17d48f6dda4bdadd",
+  "ebe3e6ac07260fe8",
+  "5059f3ff938290d8",
+  "4763083d37c033bc",
+  "1cae851a611b3693",
+  "beff1a0123a15a49",
+  "1a51abf77a78ef4b",
+  "7ed56832ffce913a"
  ],
  "seen_evergreen": [
   "walker-seed-launch",
@@ -554,7 +561,9 @@
   "hormozi-core-four",
   "walker-mental-triggers",
   "sabri-adgrid",
-  "hormozi-value-equation"
+  "hormozi-value-equation",
+  "cialdini-social-proof",
+  "brunson-hook-story-offer"
  ],
- "last_sent_date": "2026-10-16"
+ "last_sent_date": "2026-10-17"
 }
