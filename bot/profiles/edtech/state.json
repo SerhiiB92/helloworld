@@ -546,11 +546,20 @@
   "8fdb001c6fbbeeba",
   "afc20223f54edf97",
   "c6902de7935cff7d",
-  "b954f636a7aa609e"
+  "b954f636a7aa609e",
+  "d3dadb888aa09855",
+  "c0ff027dd5c8945e",
+  "e3e4c82608302238",
+  "ea23e2349c1b55fa",
+  "b22810716c7ab4ef",
+  "f8fe8ec4ef778665",
+  "aa26efe34b0e9f90"
  ],
  "seen_evergreen": [
   "brunson-attractive-character",
-  "brunson-epiphany-bridge"
+  "brunson-epiphany-bridge",
+  "creative-angle-testing",
+  "hormozi-naming"
  ],
- "last_sent_date": "2026-10-18"
+ "last_sent_date": "2026-10-19"
 }
