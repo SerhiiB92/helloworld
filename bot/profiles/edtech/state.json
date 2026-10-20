@@ -553,13 +553,22 @@
   "ea23e2349c1b55fa",
   "b22810716c7ab4ef",
   "f8fe8ec4ef778665",
-  "aa26efe34b0e9f90"
+  "aa26efe34b0e9f90",
+  "07795e9d8b121204",
+  "79390125cf09393d",
+  "85800fba923da12d",
+  "4b1b5b2dc0d8cd9a",
+  "fe095bb27f789a9e",
+  "1eb078b1a3fd43e0",
+  "855c8a5ca983f6fc"
  ],
  "seen_evergreen": [
   "brunson-attractive-character",
   "brunson-epiphany-bridge",
   "creative-angle-testing",
-  "hormozi-naming"
+  "hormozi-naming",
+  "sabri-adgrid",
+  "hormozi-grand-slam"
  ],
- "last_sent_date": "2026-10-19"
+ "last_sent_date": "2026-10-20"
 }
