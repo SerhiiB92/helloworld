@@ -560,7 +560,14 @@
   "4b1b5b2dc0d8cd9a",
   "fe095bb27f789a9e",
   "1eb078b1a3fd43e0",
-  "855c8a5ca983f6fc"
+  "855c8a5ca983f6fc",
+  "92fdbecd00a1eb00",
+  "4f9f6ddbdf20bc57",
+  "cf940b2322374a6c",
+  "29aef48e851fbbd9",
+  "f85021ba1927016f",
+  "d8f655b2da15c70a",
+  "f55f1012df3af5e1"
  ],
  "seen_evergreen": [
   "brunson-attractive-character",
@@ -568,7 +575,9 @@
   "creative-angle-testing",
   "hormozi-naming",
   "sabri-adgrid",
-  "hormozi-grand-slam"
+  "hormozi-grand-slam",
+  "brunson-false-beliefs",
+  "walker-plf"
  ],
- "last_sent_date": "2026-10-20"
+ "last_sent_date": "2026-10-21"
 }
