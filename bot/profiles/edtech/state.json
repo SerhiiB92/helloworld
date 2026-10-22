@@ -567,7 +567,14 @@
   "29aef48e851fbbd9",
   "f85021ba1927016f",
   "d8f655b2da15c70a",
-  "f55f1012df3af5e1"
+  "f55f1012df3af5e1",
+  "50d15511a0ac8ff8",
+  "e3ccf5bac2524179",
+  "6a789f7b060a6230",
+  "2a6de3e60e591c1c",
+  "019626c5394b6944",
+  "37a2edeb5769cea2",
+  "88629c3456837021"
  ],
  "seen_evergreen": [
   "brunson-attractive-character",
@@ -577,7 +584,9 @@
   "sabri-adgrid",
   "hormozi-grand-slam",
   "brunson-false-beliefs",
-  "walker-plf"
+  "walker-plf",
+  "hormozi-value-equation",
+  "cialdini-social-proof"
  ],
- "last_sent_date": "2026-10-21"
+ "last_sent_date": "2026-10-22"
 }
