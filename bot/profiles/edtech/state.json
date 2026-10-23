@@ -574,7 +574,14 @@
   "2a6de3e60e591c1c",
   "019626c5394b6944",
   "37a2edeb5769cea2",
-  "88629c3456837021"
+  "88629c3456837021",
+  "f2f8cc91092588b6",
+  "51e2c26a7ab29f63",
+  "08304d077ce47f81",
+  "716a7165d754a334",
+  "7d25447620638ebd",
+  "e0eebe402c1edd15",
+  "9a0675bc1f269cc6"
  ],
  "seen_evergreen": [
   "brunson-attractive-character",
@@ -586,7 +593,9 @@
   "brunson-false-beliefs",
   "walker-plf",
   "hormozi-value-equation",
-  "cialdini-social-proof"
+  "cialdini-social-proof",
+  "hormozi-give-give-ask",
+  "webinar-perfect"
  ],
- "last_sent_date": "2026-10-22"
+ "last_sent_date": "2026-10-23"
 }
