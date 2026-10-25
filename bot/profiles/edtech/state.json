@@ -588,7 +588,14 @@
   "315be0b173096575",
   "b8c20f6de1579371",
   "c78d6a2ac5b5ff2a",
-  "c0db2a5cc1d990fd"
+  "c0db2a5cc1d990fd",
+  "466f31866a7b4b0d",
+  "1e45116d8b933c88",
+  "ca5aac1846befd6f",
+  "beb91b60bbe9cf7a",
+  "182bf8120d3a580e",
+  "2ca2514a05be3841",
+  "f9a183bfb076b22a"
  ],
  "seen_evergreen": [
   "brunson-attractive-character",
@@ -604,7 +611,9 @@
   "hormozi-give-give-ask",
   "webinar-perfect",
   "hormozi-core-four",
-  "creative-ugc"
+  "creative-ugc",
+  "metrics-one-metric",
+  "walker-seed-launch"
  ],
- "last_sent_date": "2026-10-24"
+ "last_sent_date": "2026-10-25"
 }
