@@ -595,7 +595,14 @@
   "beb91b60bbe9cf7a",
   "182bf8120d3a580e",
   "2ca2514a05be3841",
-  "f9a183bfb076b22a"
+  "f9a183bfb076b22a",
+  "f0f84e8ef0fe6410",
+  "d7174fc72efacd8d",
+  "99bf4d522ab7f42c",
+  "52175b4a8f5bc6e0",
+  "78bdc74dbde9082d",
+  "a5c04ecf3243095c",
+  "64500de363676e87"
  ],
  "seen_evergreen": [
   "brunson-attractive-character",
@@ -613,7 +620,9 @@
   "hormozi-core-four",
   "creative-ugc",
   "metrics-one-metric",
-  "walker-seed-launch"
+  "walker-seed-launch",
+  "walker-mental-triggers",
+  "brunson-hook-story-offer"
  ],
- "last_sent_date": "2026-10-25"
+ "last_sent_date": "2026-10-26"
 }
