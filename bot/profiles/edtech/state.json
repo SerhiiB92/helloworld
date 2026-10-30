@@ -623,11 +623,20 @@
   "bade7d7d5005e5e2",
   "fa130aab0daea57c",
   "ce3bd9641a3b40dd",
-  "9437c18d1c766208"
+  "9437c18d1c766208",
+  "e1f1d2a31b32f0c1",
+  "0601a75f35b46848",
+  "c848a64ef23c30fa",
+  "f763ca06ba3e3603",
+  "4efd4590b6afffba",
+  "825b84bb558e68d0",
+  "ebd25a4964c81fd7"
  ],
  "seen_evergreen": [
   "cialdini-commitment",
-  "walker-sideways-letter"
+  "walker-sideways-letter",
+  "creative-angle-testing",
+  "metrics-ltv-cac"
  ],
- "last_sent_date": "2026-10-29"
+ "last_sent_date": "2026-10-30"
 }
