@@ -630,13 +630,22 @@
   "f763ca06ba3e3603",
   "4efd4590b6afffba",
   "825b84bb558e68d0",
-  "ebd25a4964c81fd7"
+  "ebd25a4964c81fd7",
+  "ebcbee372033a0de",
+  "80d7d3d0d3850ccd",
+  "63d8a0488a3e5697",
+  "ae092762f50ff5b6",
+  "731ecf5b35f008dd",
+  "788048af2ab205b9",
+  "736399d10c6523db"
  ],
  "seen_evergreen": [
   "cialdini-commitment",
   "walker-sideways-letter",
   "creative-angle-testing",
-  "metrics-ltv-cac"
+  "metrics-ltv-cac",
+  "hormozi-lead-magnet",
+  "walker-seed-launch"
  ],
- "last_sent_date": "2026-10-30"
+ "last_sent_date": "2026-10-31"
 }
