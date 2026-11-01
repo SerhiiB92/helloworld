@@ -637,7 +637,14 @@
   "ae092762f50ff5b6",
   "731ecf5b35f008dd",
   "788048af2ab205b9",
-  "736399d10c6523db"
+  "736399d10c6523db",
+  "3d7038e6b51fd774",
+  "58a497b9e13e9e8f",
+  "66e1568acac473f4",
+  "9f7958b5eedab3cd",
+  "3ea8cd3af7bac3a0",
+  "67f09d2086d076ec",
+  "12e0a19edf9843d4"
  ],
  "seen_evergreen": [
   "cialdini-commitment",
@@ -645,7 +652,9 @@
   "creative-angle-testing",
   "metrics-ltv-cac",
   "hormozi-lead-magnet",
-  "walker-seed-launch"
+  "walker-seed-launch",
+  "brunson-attractive-character",
+  "hormozi-guarantee"
  ],
- "last_sent_date": "2026-10-31"
+ "last_sent_date": "2026-11-01"
 }
