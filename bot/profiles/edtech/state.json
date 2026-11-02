@@ -644,7 +644,14 @@
   "9f7958b5eedab3cd",
   "3ea8cd3af7bac3a0",
   "67f09d2086d076ec",
-  "12e0a19edf9843d4"
+  "12e0a19edf9843d4",
+  "d84f16f32e2d12f9",
+  "2f0ab51c0d11a2bb",
+  "a72b69856e1a32ff",
+  "abb9e24fc444fd0a",
+  "731b100351364815",
+  "71c1e38257b3c8a1",
+  "a3c23b04c1064f0d"
  ],
  "seen_evergreen": [
   "cialdini-commitment",
@@ -654,7 +661,9 @@
   "hormozi-lead-magnet",
   "walker-seed-launch",
   "brunson-attractive-character",
-  "hormozi-guarantee"
+  "hormozi-guarantee",
+  "hormozi-value-equation",
+  "walker-plf"
  ],
- "last_sent_date": "2026-11-01"
+ "last_sent_date": "2026-11-02"
 }
