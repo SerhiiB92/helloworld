@@ -651,7 +651,14 @@
   "abb9e24fc444fd0a",
   "731b100351364815",
   "71c1e38257b3c8a1",
-  "a3c23b04c1064f0d"
+  "a3c23b04c1064f0d",
+  "6fcf4f4fc8c2e6dc",
+  "1820bce33f5dfac8",
+  "2a046c4ae4e881ba",
+  "fd8fe85106651ca2",
+  "521a346c3341aa99",
+  "a04afd9010f7b190",
+  "ffcd7e3183533f19"
  ],
  "seen_evergreen": [
   "cialdini-commitment",
@@ -663,7 +670,9 @@
   "brunson-attractive-character",
   "hormozi-guarantee",
   "hormozi-value-equation",
-  "walker-plf"
+  "walker-plf",
+  "hormozi-naming",
+  "hormozi-give-give-ask"
  ],
- "last_sent_date": "2026-11-02"
+ "last_sent_date": "2026-11-03"
 }
