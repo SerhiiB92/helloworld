@@ -658,7 +658,14 @@
   "fd8fe85106651ca2",
   "521a346c3341aa99",
   "a04afd9010f7b190",
-  "ffcd7e3183533f19"
+  "ffcd7e3183533f19",
+  "5dafc3f51253bbe7",
+  "1828c80218678cbe",
+  "384fda01bad37a6d",
+  "57735edee33a0338",
+  "404f0be8b10306ba",
+  "7f2fa11db2b29d6a",
+  "8c50bf97051fccc4"
  ],
  "seen_evergreen": [
   "cialdini-commitment",
@@ -672,7 +679,9 @@
   "hormozi-value-equation",
   "walker-plf",
   "hormozi-naming",
-  "hormozi-give-give-ask"
+  "hormozi-give-give-ask",
+  "cialdini-social-proof",
+  "webinar-perfect"
  ],
- "last_sent_date": "2026-11-03"
+ "last_sent_date": "2026-11-04"
 }
