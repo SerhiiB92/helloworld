@@ -672,7 +672,14 @@
   "eb684f1f3da337f4",
   "d9592ca16b72b809",
   "a5c1974a1a01da1f",
-  "01dee7383fed41ac"
+  "01dee7383fed41ac",
+  "bab46a92bc859873",
+  "98d0145686ad7cc2",
+  "34d8f7556fdfdf1a",
+  "de774d6b6014e005",
+  "156a6d3847d1385c",
+  "31f0085160d2c0db",
+  "d729211f7fb9e98e"
  ],
  "seen_evergreen": [
   "cialdini-commitment",
@@ -690,7 +697,9 @@
   "cialdini-social-proof",
   "webinar-perfect",
   "sabri-adgrid",
-  "hormozi-core-four"
+  "hormozi-core-four",
+  "hormozi-grand-slam",
+  "creative-ugc"
  ],
- "last_sent_date": "2026-11-05"
+ "last_sent_date": "2026-11-06"
 }
