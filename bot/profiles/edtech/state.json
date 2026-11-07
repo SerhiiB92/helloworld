@@ -679,7 +679,14 @@
   "de774d6b6014e005",
   "156a6d3847d1385c",
   "31f0085160d2c0db",
-  "d729211f7fb9e98e"
+  "d729211f7fb9e98e",
+  "c55b02435b9495da",
+  "fdf3d88c1b482d13",
+  "325c14b6fec9c902",
+  "820889f6c6c5f85b",
+  "e16944e5e9d45118",
+  "dff51de50eff6789",
+  "484189736f081671"
  ],
  "seen_evergreen": [
   "cialdini-commitment",
@@ -699,7 +706,9 @@
   "sabri-adgrid",
   "hormozi-core-four",
   "hormozi-grand-slam",
-  "creative-ugc"
+  "creative-ugc",
+  "brunson-epiphany-bridge",
+  "walker-mental-triggers"
  ],
- "last_sent_date": "2026-11-06"
+ "last_sent_date": "2026-11-07"
 }
