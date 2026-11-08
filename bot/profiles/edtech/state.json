@@ -686,7 +686,14 @@
   "820889f6c6c5f85b",
   "e16944e5e9d45118",
   "dff51de50eff6789",
-  "484189736f081671"
+  "484189736f081671",
+  "d2280bf61ad150a4",
+  "7ac893ca0beb2e7c",
+  "6622d0bbca936fea",
+  "7034bafa0f71eec6",
+  "c3f4f5376b0d80de",
+  "cc01675181dc47fd",
+  "bb6305a2b0d1dd66"
  ],
  "seen_evergreen": [
   "cialdini-commitment",
@@ -708,7 +715,9 @@
   "hormozi-grand-slam",
   "creative-ugc",
   "brunson-epiphany-bridge",
-  "walker-mental-triggers"
+  "walker-mental-triggers",
+  "metrics-one-metric",
+  "brunson-false-beliefs"
  ],
- "last_sent_date": "2026-11-07"
+ "last_sent_date": "2026-11-08"
 }
