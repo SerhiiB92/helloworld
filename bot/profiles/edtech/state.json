@@ -700,11 +700,20 @@
   "5d6bc824f94cbbd4",
   "f91995e270fe804d",
   "7a245cd5b72abdbe",
-  "dddea53ea047e7ca"
+  "dddea53ea047e7ca",
+  "4fb0bf1de39f162c",
+  "6272b5edf5efc1b6",
+  "bbbebf80db4b4d57",
+  "407f32622168a199",
+  "c94cf6f63caf03f6",
+  "7f8b1a7ddcb2a8e3",
+  "ff0edc0574af5ec8"
  ],
  "seen_evergreen": [
   "brunson-value-ladder",
-  "brunson-hook-story-offer"
+  "brunson-hook-story-offer",
+  "walker-mental-triggers",
+  "sabri-adgrid"
  ],
- "last_sent_date": "2026-11-09"
+ "last_sent_date": "2026-11-10"
 }
