@@ -714,7 +714,14 @@
   "93cf63cad883e63f",
   "0c352cacf9ed6100",
   "fac2e02a89901f7c",
-  "f9dd90b1d4f8fdd8"
+  "f9dd90b1d4f8fdd8",
+  "cfd7d69b97e66f04",
+  "8cc3257acaeac7c0",
+  "bce479d7725d63cb",
+  "901c4abc4fd00dd4",
+  "44a4160b698f02e9",
+  "2b9b1f40cc6be742",
+  "739e6e1c2a4af486"
  ],
  "seen_evergreen": [
   "brunson-value-ladder",
@@ -722,7 +729,9 @@
   "walker-mental-triggers",
   "sabri-adgrid",
   "hormozi-lead-magnet",
-  "hormozi-guarantee"
+  "hormozi-guarantee",
+  "creative-ugc",
+  "creative-angle-testing"
  ],
- "last_sent_date": "2026-11-11"
+ "last_sent_date": "2026-11-12"
 }
