@@ -721,7 +721,14 @@
   "901c4abc4fd00dd4",
   "44a4160b698f02e9",
   "2b9b1f40cc6be742",
-  "739e6e1c2a4af486"
+  "739e6e1c2a4af486",
+  "e9abd28e7f54202e",
+  "e86ed4efe73ad22e",
+  "b0cddd88c083c6fe",
+  "7c154c97c8de545b",
+  "e651fb588fc0ce7b",
+  "b10d34b0ba45c49f",
+  "19dbf8674bbf6760"
  ],
  "seen_evergreen": [
   "brunson-value-ladder",
@@ -731,7 +738,9 @@
   "hormozi-lead-magnet",
   "hormozi-guarantee",
   "creative-ugc",
-  "creative-angle-testing"
+  "creative-angle-testing",
+  "webinar-perfect",
+  "walker-sideways-letter"
  ],
- "last_sent_date": "2026-11-12"
+ "last_sent_date": "2026-11-13"
 }
