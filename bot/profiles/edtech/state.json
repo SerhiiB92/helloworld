@@ -728,7 +728,14 @@
   "7c154c97c8de545b",
   "e651fb588fc0ce7b",
   "b10d34b0ba45c49f",
-  "19dbf8674bbf6760"
+  "19dbf8674bbf6760",
+  "b56b5b67d0d9c5be",
+  "8213b031a3b58eb9",
+  "bdaafb30bf56d082",
+  "daa08541aa2984a6",
+  "ea427e0ad6c25cf0",
+  "29f2f3faafbec400",
+  "feea58d9c0fcc065"
  ],
  "seen_evergreen": [
   "brunson-value-ladder",
@@ -740,7 +747,9 @@
   "creative-ugc",
   "creative-angle-testing",
   "webinar-perfect",
-  "walker-sideways-letter"
+  "walker-sideways-letter",
+  "metrics-one-metric",
+  "brunson-attractive-character"
  ],
- "last_sent_date": "2026-11-13"
+ "last_sent_date": "2026-11-14"
 }
