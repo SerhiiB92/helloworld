@@ -735,7 +735,14 @@
   "daa08541aa2984a6",
   "ea427e0ad6c25cf0",
   "29f2f3faafbec400",
-  "feea58d9c0fcc065"
+  "feea58d9c0fcc065",
+  "ce3c50c5c0f384d7",
+  "baf0da74083f09c2",
+  "dbd16d92ec1ea429",
+  "a41d00bd2862b481",
+  "85dcdd76b2be6b09",
+  "85fdc4840f8e9a64",
+  "49c471eea1fa2e7a"
  ],
  "seen_evergreen": [
   "brunson-value-ladder",
@@ -749,7 +756,9 @@
   "webinar-perfect",
   "walker-sideways-letter",
   "metrics-one-metric",
-  "brunson-attractive-character"
+  "brunson-attractive-character",
+  "hormozi-naming",
+  "hormozi-give-give-ask"
  ],
- "last_sent_date": "2026-11-14"
+ "last_sent_date": "2026-11-15"
 }
