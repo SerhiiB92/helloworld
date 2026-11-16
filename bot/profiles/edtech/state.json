@@ -742,7 +742,14 @@
   "a41d00bd2862b481",
   "85dcdd76b2be6b09",
   "85fdc4840f8e9a64",
-  "49c471eea1fa2e7a"
+  "49c471eea1fa2e7a",
+  "f5914f6ce70bdd49",
+  "c3f0e9e2fe25c2ee",
+  "3da09c83cbc1ed5d",
+  "40d6817a753b5bb8",
+  "478d072a639b1659",
+  "f8883f733bfec8b2",
+  "0b0c5998f4cd82a5"
  ],
  "seen_evergreen": [
   "brunson-value-ladder",
@@ -758,7 +765,9 @@
   "metrics-one-metric",
   "brunson-attractive-character",
   "hormozi-naming",
-  "hormozi-give-give-ask"
+  "hormozi-give-give-ask",
+  "hormozi-core-four",
+  "cialdini-social-proof"
  ],
- "last_sent_date": "2026-11-15"
+ "last_sent_date": "2026-11-16"
 }
