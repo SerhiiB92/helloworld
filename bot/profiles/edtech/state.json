@@ -749,7 +749,14 @@
   "40d6817a753b5bb8",
   "478d072a639b1659",
   "f8883f733bfec8b2",
-  "0b0c5998f4cd82a5"
+  "0b0c5998f4cd82a5",
+  "c5c9baafd7301160",
+  "ed9efee9f92046e0",
+  "2904d722b4174c99",
+  "3ffe244cc209f4e5",
+  "5073d91fcaf21997",
+  "a2bf0b885d5cd1b7",
+  "88103a5911be2c9d"
  ],
  "seen_evergreen": [
   "brunson-value-ladder",
@@ -767,7 +774,9 @@
   "hormozi-naming",
   "hormozi-give-give-ask",
   "hormozi-core-four",
-  "cialdini-social-proof"
+  "cialdini-social-proof",
+  "brunson-false-beliefs",
+  "hormozi-value-equation"
  ],
- "last_sent_date": "2026-11-16"
+ "last_sent_date": "2026-11-17"
 }
