@@ -756,7 +756,14 @@
   "3ffe244cc209f4e5",
   "5073d91fcaf21997",
   "a2bf0b885d5cd1b7",
-  "88103a5911be2c9d"
+  "88103a5911be2c9d",
+  "8e9cb8a3e86f251c",
+  "5fdbe220254c1560",
+  "6752698f3b16292a",
+  "4d8efc44ad9cbb37",
+  "b13389b1a526a344",
+  "94a363ed52e5767d",
+  "edd13c5aba0fe838"
  ],
  "seen_evergreen": [
   "brunson-value-ladder",
@@ -776,7 +783,9 @@
   "hormozi-core-four",
   "cialdini-social-proof",
   "brunson-false-beliefs",
-  "hormozi-value-equation"
+  "hormozi-value-equation",
+  "walker-plf",
+  "cialdini-commitment"
  ],
- "last_sent_date": "2026-11-17"
+ "last_sent_date": "2026-11-18"
 }
