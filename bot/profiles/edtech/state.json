@@ -763,7 +763,14 @@
   "4d8efc44ad9cbb37",
   "b13389b1a526a344",
   "94a363ed52e5767d",
-  "edd13c5aba0fe838"
+  "edd13c5aba0fe838",
+  "af03f6828cc29705",
+  "0d12d38065fef1fa",
+  "d150e3848924391a",
+  "e3a2c02ac405c33e",
+  "8e941620e5f687da",
+  "93c4b91cd860186b",
+  "4ae8345129a01eb1"
  ],
  "seen_evergreen": [
   "brunson-value-ladder",
@@ -785,7 +792,9 @@
   "brunson-false-beliefs",
   "hormozi-value-equation",
   "walker-plf",
-  "cialdini-commitment"
+  "cialdini-commitment",
+  "metrics-ltv-cac",
+  "brunson-epiphany-bridge"
  ],
- "last_sent_date": "2026-11-18"
+ "last_sent_date": "2026-11-19"
 }
