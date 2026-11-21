@@ -777,11 +777,20 @@
   "19fd51f6ba088a26",
   "4bd4e7fc035fced8",
   "f810caca51b4abd6",
-  "251e2d9f04ff10e7"
+  "251e2d9f04ff10e7",
+  "0a70dc11b4cbe98d",
+  "db8d128d1d3acf13",
+  "3127c1d3db9a6205",
+  "ee0b9d9058042126",
+  "b346e8f9cfe843b7",
+  "6939f04dcd11048f",
+  "3fe28177b1014e8b"
  ],
  "seen_evergreen": [
   "walker-seed-launch",
-  "hormozi-grand-slam"
+  "hormozi-grand-slam",
+  "cialdini-social-proof",
+  "creative-ugc"
  ],
- "last_sent_date": "2026-11-20"
+ "last_sent_date": "2026-11-21"
 }
