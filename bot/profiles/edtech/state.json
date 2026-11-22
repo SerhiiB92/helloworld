@@ -784,13 +784,22 @@
   "ee0b9d9058042126",
   "b346e8f9cfe843b7",
   "6939f04dcd11048f",
-  "3fe28177b1014e8b"
+  "3fe28177b1014e8b",
+  "639e353fd7f202f6",
+  "2253186ba39831af",
+  "d738b9b8db0e7a63",
+  "34790ba217ffc65b",
+  "d4dcc5f3137db92a",
+  "5a1b1315ae7cd0c9",
+  "060385a4e0c36d65"
  ],
  "seen_evergreen": [
   "walker-seed-launch",
   "hormozi-grand-slam",
   "cialdini-social-proof",
-  "creative-ugc"
+  "creative-ugc",
+  "hormozi-value-equation",
+  "cialdini-commitment"
  ],
- "last_sent_date": "2026-11-21"
+ "last_sent_date": "2026-11-22"
 }
