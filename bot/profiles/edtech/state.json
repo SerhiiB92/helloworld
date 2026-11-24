@@ -798,7 +798,14 @@
   "991eadcd55691cf2",
   "e9f3616efded1141",
   "22e29be68a5084d5",
-  "81309be348e55fb7"
+  "81309be348e55fb7",
+  "e9ad4221eb9278ba",
+  "0987899af96acff2",
+  "6b8c0099aa0fb7fd",
+  "cea4020e285ce38f",
+  "ff645d0b08fdc9b9",
+  "b737f6f8b5c70956",
+  "a9ffdd5078a32751"
  ],
  "seen_evergreen": [
   "walker-seed-launch",
@@ -808,7 +815,9 @@
   "hormozi-value-equation",
   "cialdini-commitment",
   "metrics-ltv-cac",
-  "creative-angle-testing"
+  "creative-angle-testing",
+  "brunson-value-ladder",
+  "metrics-one-metric"
  ],
- "last_sent_date": "2026-11-23"
+ "last_sent_date": "2026-11-24"
 }
