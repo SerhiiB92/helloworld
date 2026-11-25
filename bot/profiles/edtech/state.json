@@ -805,7 +805,14 @@
   "cea4020e285ce38f",
   "ff645d0b08fdc9b9",
   "b737f6f8b5c70956",
-  "a9ffdd5078a32751"
+  "a9ffdd5078a32751",
+  "72d40985c1fa6030",
+  "2e95446583e7fc72",
+  "e0c0d14e0bc5ed57",
+  "caa8dcd7255b3f9e",
+  "4429f7b90c766daa",
+  "5295cb90f23aa0b7",
+  "782c5e827107561f"
  ],
  "seen_evergreen": [
   "walker-seed-launch",
@@ -817,7 +824,9 @@
   "metrics-ltv-cac",
   "creative-angle-testing",
   "brunson-value-ladder",
-  "metrics-one-metric"
+  "metrics-one-metric",
+  "hormozi-give-give-ask",
+  "sabri-adgrid"
  ],
- "last_sent_date": "2026-11-24"
+ "last_sent_date": "2026-11-25"
 }
