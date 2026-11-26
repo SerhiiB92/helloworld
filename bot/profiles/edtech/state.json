@@ -812,7 +812,14 @@
   "caa8dcd7255b3f9e",
   "4429f7b90c766daa",
   "5295cb90f23aa0b7",
-  "782c5e827107561f"
+  "782c5e827107561f",
+  "bbded622b82d0e08",
+  "7eb1ce7a9f0a6e07",
+  "5f902a648af459b4",
+  "0ad59749c2f3704b",
+  "2f7e30556375e73c",
+  "5bc2d8cab28e2622",
+  "08acea427e12816f"
  ],
  "seen_evergreen": [
   "walker-seed-launch",
@@ -826,7 +833,9 @@
   "brunson-value-ladder",
   "metrics-one-metric",
   "hormozi-give-give-ask",
-  "sabri-adgrid"
+  "sabri-adgrid",
+  "brunson-epiphany-bridge",
+  "hormozi-core-four"
  ],
- "last_sent_date": "2026-11-25"
+ "last_sent_date": "2026-11-26"
 }
