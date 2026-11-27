@@ -819,7 +819,14 @@
   "0ad59749c2f3704b",
   "2f7e30556375e73c",
   "5bc2d8cab28e2622",
-  "08acea427e12816f"
+  "08acea427e12816f",
+  "ffba7059bbc69e0c",
+  "d0a9b0e0d004d0d9",
+  "35b7998979781754",
+  "4106bb54e9fe39fe",
+  "a265f067cd498172",
+  "03baed0a0324c2fa",
+  "5665f35d74ceb08f"
  ],
  "seen_evergreen": [
   "walker-seed-launch",
@@ -835,7 +842,9 @@
   "hormozi-give-give-ask",
   "sabri-adgrid",
   "brunson-epiphany-bridge",
-  "hormozi-core-four"
+  "hormozi-core-four",
+  "hormozi-guarantee",
+  "brunson-attractive-character"
  ],
- "last_sent_date": "2026-11-26"
+ "last_sent_date": "2026-11-27"
 }
